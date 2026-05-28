@@ -8,109 +8,62 @@
     "properties": {
         "flavorType": {
             "type": "object",
-            "properties": {
-                "name": {
-                    "enum": ["scripture", "gloss", "parascriptural", "peripheral"]
-                }
-            }
-        }
-    },
-    "if": {
-        "properties": { "flavorType": { "type": "object", "properties": { "name": { "const": "scripture" } } } }
-    },
-    "then": {
-        "required": ["flavorType"],
-        "properties": {
-            "flavorType": {
-                "type": "object",
-                "properties": {
-                    "name": { "type": "string", "const": "scripture" },
-                    "flavor": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "oneOf": [
-                                    { "enum": ["textTranslation", "audioTranslation"] },
-                                    { "pattern": "^x-" }
-                                ]
-                            }
-                        }
-                    },
-                    "currentScope": { "$ref": "scope.schema.json" }
-                },
-                "required": ["name", "flavor", "currentScope"],
-                "additionalProperties": false
-            }
-        },
-        "if": {
-            "properties": { "flavorType": { "type": "object", "properties": { "flavor": { "type": "object", "properties": { "name": { "const": "textTranslation" } } } } } }
-        },
-        "then": {
-            "properties": { "flavorType": { "type": "object", "properties": { "flavor": { "$ref": "scripture/text_translation.schema.json" } } } }
-        },
-        "else": {
-            "if": {
-                "properties": { "flavorType": { "type": "object", "properties": { "flavor": { "type": "object", "properties": { "name": { "const": "audioTranslation" } } } } } }
-            },
-            "then": {
-                "properties": { "flavorType": { "type": "object", "properties": { "flavor": { "$ref": "scripture/audio_translation.schema.json" } } } }
-            },
-            "else": {
-                "properties": { "flavorType": { "type": "object", "properties": { "flavor": { "$ref": "x_flavor.schema.json" } } } }
-            }
-        }
-    },
-    "else": {
-        "if": {
-            "properties": { "flavorType": { "type": "object", "properties": { "name": { "const": "gloss" } } } }
-        },
-        "then": {
-            "properties": {
-                "flavorType": {
-                    "type": "object",
+            "oneOf": [
+                {
                     "properties": {
-                        "name": { "type": "string", "const": "gloss" },
+                        "name": { "const": "scripture" },
+                        "flavor": { "$ref": "scripture/text_translation.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor", "currentScope"],
+                    "additionalProperties": false
+                },
+                {
+                    "properties": {
+                        "name": { "const": "scripture" },
+                        "flavor": { "$ref": "scripture/audio_translation.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor", "currentScope"],
+                    "additionalProperties": false
+                },
+                {
+                    "properties": {
+                        "name": { "const": "scripture" },
                         "flavor": { "$ref": "x_flavor.schema.json" },
                         "currentScope": { "$ref": "scope.schema.json" }
                     },
                     "required": ["name", "flavor", "currentScope"],
                     "additionalProperties": false
+                },
+                {
+                    "properties": {
+                        "name": { "const": "gloss" },
+                        "flavor": { "$ref": "x_flavor.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor", "currentScope"],
+                    "additionalProperties": false
+                },
+                {
+                    "properties": {
+                        "name": { "const": "parascriptural" },
+                        "flavor": { "$ref": "x_flavor.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor"],
+                    "additionalProperties": false
+                },
+                {
+                    "properties": {
+                        "name": { "const": "peripheral" },
+                        "flavor": { "$ref": "x_flavor.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor"],
+                    "additionalProperties": false
                 }
-            }
-        },
-        "else": {
-            "if": {
-                "properties": { "flavorType": { "type": "object", "properties": { "name": { "const": "parascriptural" } } } }
-            },
-            "then": {
-                "properties": {
-                    "flavorType": {
-                        "type": "object",
-                        "properties": {
-                            "name": { "type": "string", "const": "parascriptural" },
-                            "flavor": { "$ref": "x_flavor.schema.json" },
-                            "currentScope": { "$ref": "scope.schema.json" }
-                        },
-                        "required": ["name", "flavor"],
-                        "additionalProperties": false
-                    }
-                }
-            },
-            "else": {
-                "properties": {
-                    "flavorType": {
-                        "type": "object",
-                        "properties": {
-                            "name": { "type": "string", "const": "peripheral" },
-                            "flavor": { "$ref": "x_flavor.schema.json" },
-                            "currentScope": { "$ref": "scope.schema.json" }
-                        },
-                        "required": ["name", "flavor"],
-                        "additionalProperties": false
-                    }
-                }
-            }
+            ]
         }
     }
 }

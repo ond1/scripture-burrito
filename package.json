@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node code/validate.js metadata docs/examples/artifacts/*.json",
+    "generate": "python3 code/generate_type_validation_schema.py",
+    "test": "node code/validate.js metadata docs/examples/artifacts/*.json && python3 -m pytest tests/ -v",
+    "test:js": "node code/validate.js metadata docs/examples/artifacts/*.json",
+    "test:py": "python3 -m pytest tests/ -v",
     "validate": "node code/validate.js metadata"
   },
   "repository": {

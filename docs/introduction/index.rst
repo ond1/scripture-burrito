@@ -23,8 +23,6 @@ Concepts
 
 .. include:: /includes/ingredients.txt
 
-.. include:: /includes/variants.txt
-
 
 Goals
 =====

@@ -29,8 +29,6 @@ Goals
 
 #. Scripture Burrito is designed for **data interchange** between ecosystems and as a **portable archive format** for translation projects.
 
-#. Scripture Burrito is designed to work with all tools in the translation and publication process, from initial drafting through checking, publication, and revision.
-
 #. Scripture Burrito supports **non-text formats as first-class content**. The model is not "text plus multimedia" — in some cases text may play a secondary role or be absent entirely, as in oral translation or sign-language projects.
 
 #. Scripture Burrito is intended to allow **lossless roundtripping of projects between ecosystems**.

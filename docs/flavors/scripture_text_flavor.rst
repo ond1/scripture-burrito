@@ -36,6 +36,12 @@ Typical ingredient types include:
 Textual Ingredients
 --------------------
 
+Scripture Text supports three serializations of the same underlying format:
+
+* **USFM** is familiar to Bible translators and is recommended for translations in progress.
+* **USX** (the XML expression of USFM) contains machine-readable reference information that cannot be represented in USFM. Valid USFM can be round-tripped to USX; USX cannot be round-tripped to USFM without losing those references. USX is recommended for valid content oriented toward publication.
+* **USJ** is the JSON serialization of USFM, useful for programmatic processing.
+
 * ``*.SFM`` / ``*.USFM`` — Standard Paratext markup files (one per canonical book)
   * **mimeType:** ``text/x-usfm``
   * **scope:** Lists book code(s) (e.g. ``"scope": {"MAT": []}``)

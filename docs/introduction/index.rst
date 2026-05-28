@@ -6,5 +6,3 @@ Introduction
 
 .. toctree::
    overview
-   history
-   committee

@@ -27,7 +27,7 @@ Concepts
 Goals
 =====
 
-#. Scripture Burrito is designed first and foremost for **data interchange** between ecosystems, although creators and consumers may also choose to use some or all of the format internally.
+#. Scripture Burrito is designed for **data interchange** between ecosystems and as a **portable archive format** for translation projects.
 
 #. Scripture Burrito is **a Bible-lifespan format**, intended to be used from the start of translation, through checking and community testing, into publication via multiple toolchains, and then through revision.
 

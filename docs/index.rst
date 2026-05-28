@@ -14,10 +14,10 @@ Scripture Burrito currently defines these flavors:
 
 - :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
 - :ref:`scripture_audio_flavor` — recorded audio translations
-- :ref:`scripture_alignments_flavor` — alignments between any two resources with identifiers, such as a translation and a lexicon
-- :ref:`scripture_wrappers_flavor` — describes relationships between Scripture burritos, such as a text burrito and an audio burrito for the same translation
+- :ref:`parascriptural_word_alignment_flavor` — word-level alignment between two texts, such as a translation and a source language
+- Scripture Wrappers — groups related burritos together, such as a text and audio burrito for the same translation
 
-New flavors can be proposed using the ``x-`` extension mechanism; see :ref:`extending_scripture_burrito`.
+You can create your own nonstandard flavors using the ``x-`` prefix; see :ref:`extending_scripture_burrito`.
 
 Documentation
 =============
@@ -26,6 +26,7 @@ Documentation
    :maxdepth: 4
 
    introduction/index
+   tutorials/index
    schema_docs/index
    flavors/index
    examples/index

@@ -31,7 +31,7 @@ Goals
 
 #. Non-text formats such as audio and sign language are **first-class content**, not add-ons to a text translation.
 
-#. Scripture Burrito is intended to allow **lossless roundtripping of projects between ecosystems**.
+#. A burrito exported from one tool can be imported into another and back without data loss.
 
 Acknowledgements
 ================

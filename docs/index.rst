@@ -17,12 +17,6 @@ If you learn best by example, see the `minimal flavor examples <https://github.c
 
 This work has been a multi-year collaboration between several organizations, including `American Bible Society <https://americanbible.org/>`_, `Clear.Bible <https://www.clear.bible/>`_, `Eldarion <https://eldarion.com/>`_, `Bridge Connectivity Solutions <https://bridgeconn.com/>`_, `SIL <https://www.sil.org/>`_, `unfoldingWord <https://www.unfoldingword.org/>`_, `United Bible Societies <https://unitedbiblesocieties.org/>`_, and the work has been sponsored by `illumiNations <https://illuminations.bible/>`_.
 
-Future Development
-==================
-
-See future development `milestones here <https://github.com/bible-technology/scripture-burrito/milestones>`_. The Scripture Burrito :ref:`committee` invites comments on all aspects of the schema and documentation. Please use `Github Issues <https://github.com/bible-technology/scripture-burrito/issues>`_ or `Github Discussions <https://github.com/bible-technology/scripture-burrito/discussions>`_ to provide feedback.
-
-
 Documentation
 =============
 

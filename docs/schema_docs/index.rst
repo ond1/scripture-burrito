@@ -13,7 +13,6 @@ Schema Documentation
    copyright
    derived_meta
    derived_metadata
-   gloss-text_stories
    id_authorities
    identification
    ingredient
@@ -39,10 +38,7 @@ Schema Documentation
    role
    scope
    scripture-audio_translation
-   scripture-embossed_braille_scripture
-   scripture-sign_language_video_translation
    scripture-text_translation
-   scripture-typeset_scripture
    scripture_flavor_type
    software_and_user_info
    source_meta

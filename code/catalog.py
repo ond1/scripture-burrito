@@ -18,9 +18,8 @@ def checked_args():
 
     enum_filters = {
         "scripture": ["scriptureText"],
-        "gloss": ["glossedTextStory"],
-        "narrative": ["scriptureText", "glossedTextStory"],
-        "all": ["scriptureText", "glossedTextStory", "parascripturalWordAlignment"]
+        "narrative": ["scriptureText"],
+        "all": ["scriptureText", "parascripturalWordAlignment"]
     }
 
     fields = {

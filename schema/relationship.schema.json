@@ -17,11 +17,7 @@
                 {
                     "enum": [
                         "textTranslation",
-                        "audioTranslation",
-                        "typesetScripture",
-                        "signLanguageVideoTranslation",
-                        "embossedBrailleScripture",
-                        "glossedTextStory"
+                        "audioTranslation"
                     ]
                 },
                 {

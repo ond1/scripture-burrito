@@ -94,11 +94,6 @@
       "id": "dbl::fedcba9876543210:2"
     },
     {
-      "relationType": "expression",
-      "flavor": "glossedTextStory",
-      "id": "x-atl::gl47"
-    },
-    {
       "relationType": "parascriptural",
       "flavor": "x-wordAlignment",
       "id": "agmt::irvmal-4-wh"

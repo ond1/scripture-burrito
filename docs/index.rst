@@ -25,7 +25,7 @@ Documentation
 .. toctree::
    :maxdepth: 4
 
-   introduction/overview
+   introduction/index
    schema_docs/index
    flavors/index
    examples/index

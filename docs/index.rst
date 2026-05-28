@@ -2,20 +2,20 @@
    contain the root `toctree` directive.
 
 Scripture Burrito Documentation
-===============================
+================================
 
 .. image:: ../logo/burrito_logo.png
 
-After several years of development and testing, we are pleased to announce the availability of **Scripture Burrito 1.0.0** specification! We recommend that developers of Scripture and Scripture-related applications test and adopt this specification for interchanging data with other systems. Out of the box Scripture Burrito is designed to support the following types of data:
+Scripture Burrito is a standard for packaging and describing Bible translation projects. If you are building tools that create, exchange, or archive Scripture translations — or if you need to move a translation project between tools — this specification tells you how to package it so that any conforming tool can understand what it contains.
 
-- :ref:`scripture_text_flavor`
-- :ref:`scripture_audio_flavor` (beta)
+The core of Scripture Burrito is a metadata file that describes all the files in a project: what each file is, what part of Scripture it covers, and what role it plays. That metadata, together with the files it describes, is called a *burrito*. A burrito can be distributed as a zip file, a directory, a GitHub repository, a database, or via API.
 
-As interoperability is our primary goal, we are happy to accept proposals for new flavors based on common interchange scenarios. We have provided instructions and examples for :ref:`extending_scripture_burrito` by testing and implementing new flavors (using ``x-`` flavors). When multiple implementations can be demonstrated, we will consider adding them as official flavors in new schema releases.
+Scripture Burrito currently defines two flavors:
 
-If you learn best by example, see the `minimal flavor examples <https://github.com/bible-technology/sb_minimalFlavorExamples>`_.
+- :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
+- :ref:`scripture_audio_flavor` (beta) — recorded audio translations
 
-This work has been a multi-year collaboration between several organizations, including `American Bible Society <https://americanbible.org/>`_, `Clear.Bible <https://www.clear.bible/>`_, `Eldarion <https://eldarion.com/>`_, `Bridge Connectivity Solutions <https://bridgeconn.com/>`_, `SIL <https://www.sil.org/>`_, `unfoldingWord <https://www.unfoldingword.org/>`_, `United Bible Societies <https://unitedbiblesocieties.org/>`_, and the work has been sponsored by `illumiNations <https://illuminations.bible/>`_.
+New flavors can be proposed using the ``x-`` extension mechanism; see :ref:`extending_scripture_burrito`.
 
 Documentation
 =============

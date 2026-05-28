@@ -38,3 +38,8 @@ Goals
 #. Scripture Burrito supports **non-text formats as first-class content**. The model is not "text plus multimedia" — in some cases text may play a secondary role or be absent entirely, as in oral translation or sign-language projects.
 
 #. Scripture Burrito is intended to allow **lossless roundtripping of projects between ecosystems**.
+
+Acknowledgements
+================
+
+Scripture Burrito was developed through a multi-year collaboration between `American Bible Society <https://americanbible.org/>`_, `Biblica <https://www.biblica.com/>`_, `Bridge Connectivity Solutions <https://bridgeconn.com/>`_, `Clear.Bible <https://www.clear.bible/>`_, `Eldarion <https://eldarion.com/>`_, `SIL <https://www.sil.org/>`_, `unfoldingWord <https://www.unfoldingword.org/>`_, and `United Bible Societies <https://unitedbiblesocieties.org/>`_, with sponsorship from `illumiNations <https://illuminations.bible/>`_.

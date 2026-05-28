@@ -10,7 +10,7 @@ Scripture Burrito is a standard for packaging and describing Bible translation p
 
 The core of Scripture Burrito is a metadata file that describes all the files in a project: what each file is, what part of Scripture it covers, and what role it plays. That metadata, together with the files it describes, is called a *burrito*. A burrito is not bound to a physical format, for instance, the same burrito can be distributed as a zip file, a directory, a GitHub repository, a database, or via API.
 
-Scripture Burrito currently defines four flavors:
+Scripture Burrito currently defines these flavors:
 
 - :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
 - :ref:`scripture_audio_flavor` — recorded audio translations

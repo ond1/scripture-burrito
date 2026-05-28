@@ -13,7 +13,9 @@ The core of Scripture Burrito is a metadata file that describes all the files in
 Scripture Burrito currently defines two flavors:
 
 - :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
-- :ref:`scripture_audio_flavor` (beta) — recorded audio translations
+- :ref:`scripture_audio_flavor` — recorded audio translations
+- :ref:`scripture_alignments_flavor` — alignments between any two resources with identifiers, such as a translation and a lexicon
+- :ref:`scripture_wrappers_flavor` — describes relationships between Scripture burritos, such as a text burrito and an audio burrito for the same translation
 
 New flavors can be proposed using the ``x-`` extension mechanism; see :ref:`extending_scripture_burrito`.
 

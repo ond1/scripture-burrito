@@ -39,6 +39,11 @@ When the need for a new flavor standard is established, the working group brings
 
 #. A burrito exported from one tool can be imported into another and back without data loss.
 
+.. toctree::
+   :hidden:
+
+   structure
+
 Acknowledgements
 ================
 

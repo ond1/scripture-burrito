@@ -6,6 +6,8 @@ Scripture Text Specification
 
 [:ref:`Tutorial <tutorial-textTranslation>`]  [:ref:`Example <examples-textTranslation>`]
 
+This page covers fields specific to the Scripture Text flavor. For fields common to all burritos see :ref:`burrito-structure`.
+
 A Scripture Text burrito contains a Scripture translation or original-language
 edition in **USFM**, **USX**, or **USJ** format.
 

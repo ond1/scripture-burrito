@@ -6,6 +6,8 @@ Alignment Specification
 
 [:ref:`Tutorial: Word Alignment <tutorial-alignment>`]  [:ref:`Tutorial: Audio–Text Alignment <tutorial-audioAlignment>`]  [:ref:`Example: Word Alignment <examples-alignment>`]  [:ref:`Example: Audio–Text Alignment <examples-audioAlignment>`]
 
+This page covers fields specific to the Alignment flavor. For fields common to all burritos see :ref:`burrito-structure`.
+
 An alignment burrito contains word-level or timecode-level alignment data
 between two texts or between audio and text. Content files follow the
 `Scripture Burrito Alignment Format <https://github.com/bible-technology/alignment-spec>`_.

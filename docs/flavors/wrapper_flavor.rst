@@ -6,6 +6,8 @@ Wrapper Specification
 
 [:ref:`Tutorial <tutorial-wrapper>`]  [:ref:`Example <examples-wrapper>`]
 
+This page covers the Wrapper format. For the base burrito structure see :ref:`burrito-structure`.
+
 A wrapper groups two or more related burritos so that tools can discover and
 process them as a set. Common uses include bundling a text translation with its
 audio recording, or bundling a source burrito with derived and supplemental

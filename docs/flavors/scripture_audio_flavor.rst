@@ -6,6 +6,8 @@ Scripture Audio Specification
 
 [:ref:`Tutorial <tutorial-audioTranslation>`]  [:ref:`Example <examples-audioTranslation>`]
 
+This page covers fields specific to the Scripture Audio flavor. For fields common to all burritos see :ref:`burrito-structure`.
+
 A Scripture Audio burrito contains a recorded audio translation of Scripture.
 Audio files may be organised per-chapter or per-verse-range and MAY be
 accompanied by timing files that align timecodes to scripture references.

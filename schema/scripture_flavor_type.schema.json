@@ -27,7 +27,7 @@
                     ]
                 },
                 "bookScope": {
-                    "$ref": "book_scope.schema.json"
+                    "$ref": "scope.schema.json"
                 },
             },
             "required": ["name", "bookScope", "flavor"],

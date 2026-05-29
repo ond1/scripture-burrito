@@ -12,6 +12,7 @@ Schema Documentation
    common
    confidential
    copyright
+   copyright_constraints
    derived_meta
    derived_metadata
    id_authorities

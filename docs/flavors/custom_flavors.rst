@@ -1,8 +1,8 @@
 .. _custom_flavors:
 
-###########################
+############################
 Custom Flavors Specification
-###########################
+############################
 
 [:ref:`Example <examples-xScripture>`]
 
@@ -39,9 +39,9 @@ Example::
       }
     }
 
-======================
+=======================
 Custom Ingredient Roles
-======================
+=======================
 
 Standard ingredient roles are defined by the Scripture Burrito schema. A
 custom ingredient role MUST be prefixed with ``"x-"`` followed by at least

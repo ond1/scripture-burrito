@@ -17,9 +17,9 @@ A wrapper is stored as a ``wrapper.json`` file. It is distinct from a regular
 burrito: the ``format`` field is ``"scripture burrito wrapper"``, not
 ``"scripture burrito"``.
 
-===========
+================
 Top-Level Fields
-===========
+================
 
 ``format``
     MUST be the string ``"scripture burrito wrapper"``.

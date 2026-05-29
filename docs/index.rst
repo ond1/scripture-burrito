@@ -20,6 +20,9 @@ Scripture Burrito currently defines these flavors:
   [:ref:`Specification <alignment_flavor>` | :ref:`Tutorial <tutorial-alignment>` | :ref:`Example <examples-alignment>`]
 - :ref:`wrapper_flavor` — groups related burritos together, such as a text and audio burrito for the same translation
   [:ref:`Specification <wrapper_flavor>` | :ref:`Tutorial <tutorial-wrapper>` | :ref:`Example <examples-wrapper>`]
+
+Any flavor can also be extended:
+
 - :ref:`derived_flavor` — burritos produced from other burritos, such as back-translations and publication artifacts
   [:ref:`Specification <derived_flavor>` | :ref:`Tutorial <tutorial-derived>` | :ref:`Example <examples-textTranslation_derived>`]
 - :ref:`custom_flavors` — defining your own nonstandard flavor using the ``x-`` prefix

@@ -136,9 +136,9 @@ The ``languages`` array lists every language present in the translation::
   `ISO 639-3 <https://iso639-3.sil.org/>`_ for the three-letter code.
 * ``name`` follows the same locale-map pattern as ``identification.name``.
 
-==============
+===============
 5. Type section
-==============
+===============
 
 The ``type`` section declares the flavor — the kind of content this burrito
 contains. For a text translation::
@@ -174,9 +174,9 @@ contains. For a text translation::
   :ref:`scripture_text_flavor` for the full set of values.
 * ``projectType`` — ``"standard"`` for a normal translation.
 
-================
+===================
 6. Agencies section
-================
+===================
 
 The ``agencies`` array records which organisations are responsible for this
 content::
@@ -202,9 +202,9 @@ content::
   authority's scoped format (e.g. ``"dbl::54650cfa5117ad690fb05fb6"``);
   otherwise a stable URL for the organisation is fine.
 
-====================
+======================
 7. Ingredients section
-====================
+======================
 
 The ``ingredients`` object is the heart of the burrito. It maps every file path
 (relative to the burrito root) to a descriptor that tells consuming tools what

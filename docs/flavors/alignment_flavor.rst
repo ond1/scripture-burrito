@@ -65,9 +65,9 @@ in the specification and MAY be used:
 
 Custom alignment types MAY be used; they SHOULD be prefixed with ``"x-"``.
 
-================
+=================
 Reference Schemes
-================
+=================
 
 The alignment format is extensible. The following reference schemes MAY be
 used:

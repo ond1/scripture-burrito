@@ -81,9 +81,9 @@ We will build the ``metadata.json`` file section by section.
        }
      ],
 
-==============
+===============
 4. Type section
-==============
+===============
 
 For an audio translation the ``flavorType.name`` is ``"scripture"`` and the
 ``flavor.name`` is ``"audioTranslation"``::
@@ -119,9 +119,9 @@ For an audio translation the ``flavorType.name`` is ``"scripture"`` and the
 * ``currentScope`` lists the chapters present. Chapter numbers are strings.
   An empty array (``[]``) means all chapters of the book are included.
 
-================
+===================
 5. Agencies section
-================
+===================
 
 ::
 
@@ -135,9 +135,9 @@ For an audio translation the ``flavorType.name`` is ``"scripture"`` and the
        }
      ],
 
-====================
+======================
 6. Ingredients section
-====================
+======================
 
 Each audio file and its corresponding timing file are listed as ingredients.
 Audio files have a chapter scope; timing files carry the same scope and

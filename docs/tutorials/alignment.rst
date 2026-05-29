@@ -81,9 +81,9 @@ An alignment burrito typically involves two languages. List both::
        }
      ],
 
-==============
+===============
 4. Type section
-==============
+===============
 
 The ``type`` section declares this as an alignment burrito::
 
@@ -102,9 +102,9 @@ The ``type`` section declares this as an alignment burrito::
 * Unlike scripture burritos, ``currentScope`` is not required — the alignment
   files themselves record which references are covered.
 
-================
+===================
 5. Agencies section
-================
+===================
 
 ::
 
@@ -118,9 +118,9 @@ The ``type`` section declares this as an alignment burrito::
        }
      ],
 
-====================
+======================
 6. Ingredients section
-====================
+======================
 
 Each alignment file is listed as an ingredient::
 

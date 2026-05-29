@@ -71,9 +71,9 @@ The directory looks like this::
        }
      ],
 
-==============
+===============
 4. Type section
-==============
+===============
 
 ::
 
@@ -102,9 +102,9 @@ The directory looks like this::
        }
      ],
 
-====================
+======================
 6. Ingredients section
-====================
+======================
 
 The alignment file is the only ingredient::
 
@@ -121,9 +121,9 @@ Note that the audio file itself (``ephesians.mp3``) is not an ingredient of
 this burrito — it belongs to a separate audio translation burrito. This
 alignment burrito links the two together.
 
-=========================================
+==========================================
 7. Structure of the alignment content file
-=========================================
+==========================================
 
 The file ``ephesians-audio-text.json`` follows the alignment format. The
 alignment type here is ``audio-reference``, with roles ``timecode`` (source)

@@ -97,9 +97,9 @@ Key fields:
 * ``defaultLocale`` — the BCP-47 language tag for the default locale of the
   localized text fields above.
 
-=================
+===================
 3. Contents section
-=================
+===================
 
 The ``contents`` section is the heart of the wrapper. It lists every burrito
 that belongs to this project::
@@ -195,9 +195,9 @@ Putting it all together::
 Save this file as ``wrapper.json`` in the project root (the directory that
 contains the burrito subdirectories).
 
-======================
+=========================
 5. Validating the wrapper
-======================
+=========================
 
 The Scripture Burrito toolkit includes a validator for wrapper files. From the
 repository root::

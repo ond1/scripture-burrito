@@ -1,117 +1,103 @@
 .. _scripture_audio_flavor:
 
-###############
-Scripture Audio
-###############
+################################
+Scripture Audio Specification
+################################
 
-======
-Status
-======
+[:ref:`Tutorial <tutorial-audioTranslation>`]  [:ref:`Example <examples-audioTranslation>`]
 
-This flavor is in **beta** and we are actively seeking feedback.
+A Scripture Audio burrito contains a recorded audio translation of Scripture.
+Audio files may be organised per-chapter or per-verse-range and MAY be
+accompanied by timing files that align timecodes to scripture references.
 
-=======
-History
-=======
+===========
+Type Fields
+===========
 
-The Scripture Audio flavor is based on the Digital Bible Library's audio entry type. As of August 2019, DBL "audio bundles" have been used to represent over 1100 audio projects in over 750 languages. These bundles are consumed by many publisher-facing tool chains, including YouVersion and Megavoice.
+``type.flavorType.name``
+    MUST be ``"scripture"``.
 
-Initially, audio was uploaded to DBL via Paratext. Recently, this feature has been removed from Paratext in favour of Nathanael, a desktop application maintained by DBL which facilites non-text uploads and downloads. A significant number of DBL audio entries were created via a batch import from Faith Comes By Hearing's Digital Bible Platform.
+``type.flavorType.flavor.name``
+    MUST be ``"audioTranslation"``.
 
-=======
-Content
-=======
+``type.flavorType.flavor.performance``
+    MUST be present. MUST be a non-empty array. The array MUST contain
+    exactly one voice-type value and exactly one delivery-style value:
 
-DBL stores one mp3 file per chapter. An option to store "source" wav files has recently been added.
+    * Voice type (exactly one MUST be present):
 
-=======================
-Metadata Flavor Details
-=======================
+      * ``"singleVoice"`` — one reader throughout
+      * ``"multipleVoice"`` — multiple readers
 
----------------
-translationType
----------------
+    * Delivery style (exactly one MUST be present):
 
-This is one of
+      * ``"reading"`` — straight reading
+      * ``"drama"`` — dramatized production
 
-* First
+    The following values MAY also be included:
 
-* New
+    * ``"withMusic"`` — background or incidental music is present
+    * ``"withEffects"`` — sound effects are present
+    * ``"withHeadings"`` — section headings are read aloud
 
-* Revision
+``type.flavorType.flavor.formats``
+    MUST be present. MUST be a non-empty object. Each key is an arbitrary
+    label; each value MUST be a format descriptor with:
 
-* Study / Help Material
+    * ``compression`` (REQUIRED): MUST be ``"mp3"`` or ``"wav"``
+    * ``trackConfiguration`` (OPTIONAL): one of ``"1/0 (Mono)"``,
+      ``"Dual mono"``, ``"2/0 (Stereo)"``, ``"5.1 Surround"``
+    * ``bitRate`` (OPTIONAL): integer, bits per second
+    * ``bitDepth`` (OPTIONAL): integer
+    * ``samplingRate`` (OPTIONAL): integer, Hz
 
---------
-audience
---------
+``type.flavorType.currentScope``
+    MUST be present. Keys MUST be valid USFM book codes. Values are arrays
+    of chapter numbers as strings (e.g. ``["1", "2", "3"]``); an empty
+    array means all chapters are present.
 
-This is one of
+============
+Ingredients
+============
 
-* Basic
+**Audio files**
 
-* Common
+At least one audio ingredient MUST be present. Audio ingredients MUST use one
+of the following MIME types:
 
-* Common - Literary
+* ``"audio/mpeg"`` — MP3
+* ``"audio/ogg;codecs=opus"`` — OGG Opus
+* ``"audio/wav"`` — WAV
 
-* Literary
+Audio ingredients MUST include a ``scope``. Scope values are chapter strings
+(e.g. ``["1"]``) for chapter-level recordings, or verse-range strings
+(e.g. ``["1:1-21"]``) for finer-grained recordings.
 
-* Liturgical
+Every book and chapter declared in ``currentScope`` MUST be covered by at
+least one audio ingredient.
 
-* Children
+**Timing files**
 
--------------
-dramatization
--------------
+Timing files are OPTIONAL but RECOMMENDED when verse-level navigation is
+needed. A timing file MUST carry ``"role": "timing"`` and
+``"mimeType": "application/json"``. It MUST carry a ``scope`` matching the
+audio file it annotates.
 
-This is one of
-
-* Dramatized
-
-* Non-Dramatized
-
-* Single-Voice
-
----------
-timingDir
----------
-
-This optional element provides a path to the "directory" containing timing files.
-
------------------
-Source properties
------------------
-
-An optional source element provides the following information:
-
-* compression (mp3 or wav)
-
-* track configuration
-
-* optionally, the bit rate
-
-* optionally, the bit depth
-
-* optionally, the sampling rate
-
----------------------
-Production properties
----------------------
-
-An optional production element provides similar information to the source element, for the production files.
+Timing files MUST conform to the
+`Scripture Burrito Alignment Format <https://github.com/bible-technology/alignment-spec>`_,
+using the ``audio-reference`` alignment type with ``vtt-timecode`` and
+``u23003`` reference schemes.
 
 ===========
 Conventions
 ===========
 
--------------------------
-contentResourcesByChapter
--------------------------
+``contentResourcesByChapter``
+    If present, confirms that every audio ingredient covers exactly one
+    chapter. If absent, audio files MAY cover verse ranges, sections, or
+    non-contiguous selections.
 
-If present, this confirms that all audio files correspond to exactly one chapter. If absent, each audio file may correpond to a section or a non-contiguous selection of verses. This latter scenario is particularly important for story-based projects.
-
---------
-bookDirs
---------
-
-The de facto DBL structure of audio entries was defined by the original Paratext audio uploader. There is one "directory" per book, where each directory contains one "file" per chapter, with names derived from Paratext book names. When present, this convention confirms that the historical DBL structure has been respected. When absent, this structure may or may not be partially or fully respected. (The structure is not strictly required because the metadata provides locations and roles of resources explicitly, but some tool chains have relied on the well-known directory structure.)
+``bookDirs``
+    If present, confirms that audio files follow the historical DBL directory
+    layout: one directory per book, one file per chapter. This layout is not
+    required — ingredient paths in ``metadata.json`` are authoritative.

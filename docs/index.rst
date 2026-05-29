@@ -13,17 +13,21 @@ The core of Scripture Burrito is a metadata file that describes all the files in
 Scripture Burrito currently defines these flavors:
 
 - :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
+  [:ref:`Specification <scripture_text_flavor>` | :ref:`Tutorial <tutorial-textTranslation>` | :ref:`Example <examples-textTranslation>`]
 - :ref:`scripture_audio_flavor` — recorded audio translations
-- :ref:`parascriptural_word_alignment_flavor` — word-level alignment between two texts, such as a translation and a source language
-- Scripture Wrappers — groups related burritos together, such as a text and audio burrito for the same translation
+  [:ref:`Specification <scripture_audio_flavor>` | :ref:`Tutorial <tutorial-audioTranslation>` | :ref:`Example <examples-audioTranslation>`]
+- :ref:`alignment_flavor` — word-level or timecode alignment between two texts
+  [:ref:`Specification <alignment_flavor>` | :ref:`Tutorial <tutorial-alignment>` | :ref:`Example <examples-alignment>`]
+- :ref:`wrapper_flavor` — groups related burritos together, such as a text and audio burrito for the same translation
+  [:ref:`Specification <wrapper_flavor>` | :ref:`Tutorial <tutorial-wrapper>` | :ref:`Example <examples-wrapper>`]
 
-You can create your own nonstandard flavors using the ``x-`` prefix; see :ref:`extending_scripture_burrito`.
+You can create your own nonstandard flavors using the ``x-`` prefix.
 
 Documentation
 =============
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    introduction/index
    tutorials/index

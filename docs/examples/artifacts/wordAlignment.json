@@ -35,28 +35,9 @@
   "confidential": false,
   "type": {
     "flavorType": {
-      "name": "parascriptural",
+      "name": "alignment",
       "flavor": {
-        "name": "x-wordAlignment",
-        "autoAlignerVersion": "0.8",
-        "stopWords": true,
-        "stemmer": {
-          "name": "bcs-hindi",
-          "version": "1.2",
-          "affixes": true
-        },
-        "manualAlignment": {
-          "user": "anil.john",
-          "references": [
-            {
-              "start": 25535,
-              "end": 26415
-            },
-            {
-              "start": 29321
-            }
-          ]
-        }
+        "name": "alignment"
       }
     }
   },

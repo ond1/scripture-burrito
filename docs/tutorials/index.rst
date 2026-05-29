@@ -9,3 +9,7 @@ Step-by-step guides for common Scripture Burrito tasks.
 .. toctree::
 
    textTranslation
+   audioTranslation
+   alignment
+   audioAlignment
+   wrapper

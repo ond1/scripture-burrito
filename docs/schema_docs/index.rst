@@ -8,6 +8,7 @@ Schema Documentation
    design
    agencies
    agency
+   alignment
    common
    confidential
    copyright
@@ -49,4 +50,11 @@ Schema Documentation
    template_metadata
    type
    unm49
+   wrapper-metadata
+   wrapper-meta
+   wrapper-contents
+   wrapper-burrito
+   wrapper-generator
+   wrapper-meta_version
+   wrapper-meta_date_created
    x_flavor

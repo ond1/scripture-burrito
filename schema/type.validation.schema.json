@@ -13,6 +13,7 @@
                     "enum": [
                         "scripture",
                         "gloss",
+                        "alignment",
                         "parascriptural",
                         "peripheral"
                     ]
@@ -193,7 +194,7 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "const": "parascriptural"
+                                "const": "alignment"
                             }
                         }
                     }
@@ -206,10 +207,10 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "const": "parascriptural"
+                                "const": "alignment"
                             },
                             "flavor": {
-                                "$ref": "x_flavor.schema.json"
+                                "$ref": "alignment/alignment.schema.json"
                             },
                             "currentScope": {
                                 "$ref": "scope.schema.json"
@@ -224,26 +225,64 @@
                 }
             },
             "else": {
-                "properties": {
-                    "flavorType": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "const": "peripheral"
-                            },
-                            "flavor": {
-                                "$ref": "x_flavor.schema.json"
-                            },
-                            "currentScope": {
-                                "$ref": "scope.schema.json"
+                "if": {
+                    "properties": {
+                        "flavorType": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "const": "parascriptural"
+                                }
                             }
-                        },
-                        "required": [
-                            "name",
-                            "flavor"
-                        ],
-                        "additionalProperties": false
+                        }
+                    }
+                },
+                "then": {
+                    "properties": {
+                        "flavorType": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "parascriptural"
+                                },
+                                "flavor": {
+                                    "$ref": "x_flavor.schema.json"
+                                },
+                                "currentScope": {
+                                    "$ref": "scope.schema.json"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "flavor"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "else": {
+                    "properties": {
+                        "flavorType": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "peripheral"
+                                },
+                                "flavor": {
+                                    "$ref": "x_flavor.schema.json"
+                                },
+                                "currentScope": {
+                                    "$ref": "scope.schema.json"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "flavor"
+                            ],
+                            "additionalProperties": false
+                        }
                     }
                 }
             }

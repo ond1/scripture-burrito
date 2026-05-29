@@ -1,8 +1,10 @@
 .. _tutorial-textTranslation:
 
-#############################################
-Tutorial: Packaging a Text Translation Burrito
-#############################################
+#######################
+Scripture Text Tutorial
+#######################
+
+[:ref:`Specification <scripture_text_flavor>`]  [:ref:`Example <examples-textTranslation>`]
 
 This tutorial walks through creating a Scripture Burrito metadata file for a
 Scripture text translation. By the end you will have a valid ``metadata.json``
@@ -146,7 +148,7 @@ contains. For a text translation::
          "name": "scripture",
          "flavor": {
            "name": "textTranslation",
-           "usfmVersion": "3.0",
+           "usfmVersion": "3.1",
            "translationType": "firstTranslation",
            "audience": "common",
            "projectType": "standard"
@@ -308,7 +310,7 @@ Putting it all together::
          "name": "scripture",
          "flavor": {
            "name": "textTranslation",
-           "usfmVersion": "3.0",
+           "usfmVersion": "3.1",
            "translationType": "firstTranslation",
            "audience": "common",
            "projectType": "standard"

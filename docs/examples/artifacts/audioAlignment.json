@@ -1,0 +1,65 @@
+{
+  "format": "scripture burrito",
+  "meta": {
+    "version": "1.0.0",
+    "category": "source",
+    "generator": {
+      "softwareName": "AudioAligner",
+      "softwareVersion": "1.2.0"
+    },
+    "defaultLocale": "en",
+    "dateCreated": "2025-11-10T08:00:00Z"
+  },
+  "identification": {
+    "name": {
+      "en": "Ephesians Audio–Text Alignment"
+    },
+    "description": {
+      "en": "Timecode alignment of Ephesians ULB audio recording to scripture text references"
+    }
+  },
+  "languages": [
+    {
+      "tag": "en",
+      "name": {"en": "English"}
+    }
+  ],
+  "type": {
+    "flavorType": {
+      "name": "alignment",
+      "flavor": {
+        "name": "alignment"
+      }
+    }
+  },
+  "agencies": [
+    {
+      "id": "https://www.unfoldingword.org",
+      "roles": ["rightsHolder", "content"],
+      "url": "https://www.unfoldingword.org",
+      "name": {
+        "en": "unfoldingWord"
+      },
+      "abbr": {
+        "en": "uW"
+      }
+    }
+  ],
+  "ingredients": {
+    "alignments/ephesians-audio-text.json": {
+      "checksum": {"md5": "0123456789abcdef0123456789abcdef"},
+      "mimeType": "application/json",
+      "size": 8400,
+      "scope": {"EPH": []}
+    }
+  },
+  "copyright": {
+    "shortStatements": [
+      {
+        "statement": "Alignment data: Public domain.",
+        "mimetype": "text/plain",
+        "lang": "en"
+      }
+    ]
+  }
+}

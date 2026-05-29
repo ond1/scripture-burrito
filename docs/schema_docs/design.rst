@@ -101,7 +101,7 @@ A Scripture Text burrito looks like this:
        "name": "scripture",
        "flavor": {
          "name": "textTranslation",
-         "usfmVersion": "3.0",
+         "usfmVersion": "3.1",
          "translationType": "revision",
          "audience": "common",
          "projectType": "standard"

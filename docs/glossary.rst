@@ -19,12 +19,9 @@ Scripture Burrito Concepts
 
 .. include:: /includes/conventions.txt
 
-.. include:: /includes/variants.txt
-
-
 Other Terminology
 -----------------
 
-**USFM** stands for `Unified Standard Format Markers <http://ubsicap.github.io/usfm/>`_.
+**USFM** stands for `Unified Standard Format Markers <https://docs.usfm.bible/usfm/3.1/>`_.
 
-**USX** stands for `Unified Scripture XML <https://ubsicap.github.io/usx/>`_
+**USX** stands for `Unified Scripture XML <https://docs.usfm.bible/usx/3.1/>`_.

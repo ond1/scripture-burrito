@@ -5,8 +5,7 @@ Flavors
 #######
 
 .. toctree::
-   scripture_flavors
-   gloss_flavors
-   parascriptural_flavors
-   peripheral_flavors
-   extending
+   scripture_text_flavor
+   scripture_audio_flavor
+   alignment_flavor
+   wrapper_flavor

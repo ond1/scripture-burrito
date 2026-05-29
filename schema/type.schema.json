@@ -47,6 +47,15 @@
                 },
                 {
                     "properties": {
+                        "name": { "const": "alignment" },
+                        "flavor": { "$ref": "alignment/alignment.schema.json" },
+                        "currentScope": { "$ref": "scope.schema.json" }
+                    },
+                    "required": ["name", "flavor"],
+                    "additionalProperties": false
+                },
+                {
+                    "properties": {
                         "name": { "const": "parascriptural" },
                         "flavor": { "$ref": "x_flavor.schema.json" },
                         "currentScope": { "$ref": "scope.schema.json" }

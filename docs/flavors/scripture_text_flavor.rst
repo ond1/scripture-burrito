@@ -1,279 +1,111 @@
 .. _scripture_text_flavor:
 
-##############
-Scripture Text
-##############
+##############################
+Scripture Text Specification
+##############################
 
-======
-Status
-======
+[:ref:`Tutorial <tutorial-textTranslation>`]  [:ref:`Example <examples-textTranslation>`]
 
-The **Scripture Text** flavor represents the textual content of a Scripture translation or original-language edition.  
-It corresponds to Paratext’s project format and the Digital Bible Library (DBL) “text entry” type.
+A Scripture Text burrito contains a Scripture translation or original-language
+edition in **USFM**, **USX**, or **USJ** format.
 
-This flavor is designed for any collection of Scripture books in **USFM**, **USX**, or **USJ** format, together with the supporting metadata and language resources needed to make the text portable, verifiable, and self-describing.
+===========
+Type Fields
+===========
 
-A typical Scripture Text burrito originates from a Paratext export, which includes:
+``type.flavorType.name``
+    MUST be ``"scripture"``.
 
-* A ``metadata.json`` file describing the project
-* One text file per canonical book (``.SFM``, ``.USFM``, ``.USX``, or ``.USJ``)
-* A ``versification.json`` file defining the verse system
-* One or more ``.ldml`` locale files
-* Optional supporting files (fonts, stylesheets, license, etc.)
+``type.flavorType.flavor.name``
+    MUST be ``"textTranslation"``.
 
-As of 2025, this structure aligns with the *Paratext 9.x export format* and the Scripture Burrito 1.0 schema.
+``type.flavorType.flavor.projectType``
+    MUST be present. MUST be one of:
 
-=======
-Content
-=======
+    * ``"standard"`` — a normal translation or edition
+    * ``"daughter"`` — derived from a parent translation
+    * ``"studyBible"`` — a full study Bible
+    * ``"studyBibleAdditions"`` — commentary or helps supplementing a study Bible
+    * ``"backTranslation"`` — a reverse translation for checking
+    * ``"auxiliary"`` — supplemental or experimental
+    * ``"transliterationManual"`` — manual transliteration
+    * ``"transliterationWithEncoder"`` — automatically generated transliteration
 
-A Scripture Text burrito contains a directory of **ingredients**, each describing one textual or supporting resource.  
-Each ingredient lists its checksum, size, MIME type, and role within the project.
+``type.flavorType.flavor.translationType``
+    MUST be present. MUST be one of:
 
-Typical ingredient types include:
+    * ``"firstTranslation"`` — first translation into this language
+    * ``"newTranslation"`` — a new translation independent of existing versions
+    * ``"revision"`` — a revision of a prior translation
+    * ``"studyOrHelpMaterial"`` — study notes or supplementary helps
 
---------------------
-Textual Ingredients
---------------------
+``type.flavorType.flavor.audience``
+    MUST be present. MUST be one of:
 
-Scripture Text supports three serializations of the same underlying format:
+    * ``"basic"`` — simplified or learner audience
+    * ``"common"`` — general readership
+    * ``"common-literary"`` — general readership with elevated literary style
+    * ``"literary"`` — formal or literary audience
+    * ``"liturgical"`` — designed for public worship
+    * ``"children"`` — adapted for young readers
 
-* **USFM** is familiar to Bible translators and is recommended for translations in progress.
-* **USX** (the XML expression of USFM) contains machine-readable reference information that cannot be represented in USFM. Valid USFM can be round-tripped to USX; USX cannot be round-tripped to USFM without losing those references. USX is recommended for valid content oriented toward publication.
-* **USJ** is the JSON serialization of USFM, useful for programmatic processing.
+``type.flavorType.flavor.usfmVersion``
+    MUST be present. MUST match the pattern ``\d+\.\d+(\..+)?``
+    (e.g. ``"3.1"``, ``"3.1.0"``). Applies to all three serializations
+    (USFM, USX, USJ).
 
-* ``*.SFM`` / ``*.USFM`` — Standard Paratext markup files (one per canonical book)
-  * **mimeType:** ``text/x-usfm``
-  * **scope:** Lists book code(s) (e.g. ``"scope": {"MAT": []}``)
-  * **naming convention:** Paratext numeric prefix + three-letter book code
+``type.flavorType.currentScope``
+    MUST be present. Keys MUST be valid three-letter USFM book codes. Each
+    value is a list of included chapters (integers or ``"ch:v–ch:v"`` ranges);
+    an empty list means all chapters of that book are included.
 
-* ``*.USX`` — XML serialization of USFM
-  * **mimeType:** ``application/xml``
-  * **scope:** Lists book code(s)
-  * **role:** ``text``
+============
+Ingredients
+============
 
-* ``*.USJ`` — JSON serialization of USFM
-  * **mimeType:** ``application/json``
-  * **scope:** Lists book code(s)
-  * **role:** ``text``
+**Text files**
 
-* ``versification.json`` — Defines the verse mapping used in this translation  
-  * **mimeType:** ``application/json``  
-  * **role:** ``versification``  
-  * **format:** Follows the *Copenhagen Alliance Versification* standard, which specifies canonical book order, chapter and verse structure, and mappings between versification systems.
+At least one text ingredient MUST be present. Text ingredients MUST use one of
+the following MIME types:
 
----------------------
-Language and Settings
----------------------
+* ``"text/x-usfm"`` for USFM (``.SFM``, ``.USFM``)
+* ``"application/xml"`` for USX
+* ``"application/json"`` for USJ (with ``"role": "text"``)
 
-* ``*.ldml`` — Locale Data Markup Language file defining language and script settings  
-  * **mimeType:** ``application/xml``  
-  * **role:** ``localedata``
+Text ingredients MUST include a ``scope`` mapping each ingredient to the book
+or books it contains. Every book declared in ``currentScope`` MUST be covered
+by at least one text ingredient.
 
--------------------
-Optional Resources
--------------------
+**Versification file**
 
-* ``styles.xml`` — Style definitions for rendering (optional)
-* ``license.json`` — License or permissions statement (optional)
-* ``custom.sty`` — Paratext custom style sheet (optional)
-* Fonts or auxiliary metadata files as needed
+A ``versification.json`` ingredient SHOULD be present. It MUST carry
+``"role": "versification"`` and ``"mimeType": "application/json"``. It MUST
+conform to the Copenhagen Alliance Versification format.
 
------------
-Example
------------
+**Locale data**
 
-From the Paratext export *EZPEZ Clone*:
+At least one ``.ldml`` locale file SHOULD be present. It MUST carry
+``"role": "localedata"`` and ``"mimeType": "application/xml"``.
 
-::
+**Optional ingredients**
 
-   ingredients/
-       01GENEIEIO.SFM
-       41MATEIEIO.SFM
-       45ACTEIEIO.SFM
-       67REVEIEIO.SFM
-       en.ldml
-       versification.json
+The following ingredient roles MAY be present:
 
-Each book file contains one canonical book in USFM format. The ``versification.json`` defines the reference scheme (following the Copenhagen Alliance format). The ``.ldml`` file defines locale data such as collation and numeric formatting.
-
-=======================
-Metadata Flavor Details
-=======================
-
------------
-projectType
------------
-
-Indicates the project’s relationship to other projects. One of:
-
-* ``standard`` — A normal translation or edition  
-* ``daughter`` — Derived from a parent translation  
-* ``studyBible`` — A full study Bible project  
-* ``studyBibleAdditions`` — Commentary or helps supplementing a study Bible  
-* ``backTranslation`` — A reverse translation for checking purposes  
-* ``auxiliary`` — Supplemental or experimental project  
-* ``transliterationManual`` — Manual transliteration of text  
-* ``transliterationWithEncoder`` — Automatically generated transliteration
-
----------------
-translationType
----------------
-
-Describes the translation’s stage or intent. One of:
-
-* ``firstTranslation`` — First-time translation into a language  
-* ``newTranslation`` — A new translation independent of existing versions  
-* ``revision`` — A revision of a prior translation  
-* ``studyOrHelpMaterial`` — Study notes or supplementary helps
-
---------
-audience
---------
-
-Describes the intended readership. One of:
-
-* ``basic`` — Simplified or learner audience  
-* ``common`` — General-purpose translation  
-* ``commonLiterary`` — Common audience with elevated literary style  
-* ``literary`` — Formal, literary audience  
-* ``liturgical`` — Designed for public worship  
-* ``children`` — Adapted for young readers
-
------------
-usfmVersion
------------
-
-Specifies the schema version of USFM or USX used.  
-For Paratext 9 exports, typical values include:
-
-* ``2.6.0`` — USFM 2.6  
-* ``3.0.0`` — USFM 3.0 or later  
-* ``3.1.0`` — Current USFM schema version as of 2025
+* ``"styleSheet"`` — Paratext custom style sheet
+* ``"font"`` — font files for rendering
+* ``"license"`` — license or permissions statement
 
 ===========
 Conventions
 ===========
 
--------
-textFiles
--------
+``usxRefs``
+    If present, signals that USX ingredients include machine-readable
+    cross-reference markup.
 
-Each canonical book is stored as one text file (``.SFM``, ``.USFM``, ``.USX``, or ``.USJ``), named using the **Paratext numeric prefix** and **book code** convention:
+``usxDirs``
+    If present, signals that USX ingredients include direction markup.
 
-* ``41MATEIEIO.SFM`` → Gospel of Matthew  
-* ``45ACTEIEIO.SFM`` → Acts of the Apostles  
-* ``67REVEIEIO.SFM`` → Revelation  
-
-This convention ensures stable ordering and identification across tools.
-
--------
-versification
--------
-
-Every Scripture Text burrito must include a ``versification.json`` file.  
-This file conforms to the **Copenhagen Alliance Versification** format, which provides a canonical list of books, chapters, and verses, along with optional mappings to standard versification systems (e.g. English, Hebrew, Vulgate).
-
--------------------
-localeInformation
--------------------
-
-Each ``.ldml`` file contains language- and script-level data, such as:
-
-* Collation order  
-* Number and date formats  
-* Script direction (``ltr`` or ``rtl``)  
-* Language tag (BCP-47)
-
-Multiple LDML files may be included for multilingual projects.
-
------------------
-localizedNames
------------------
-
-The ``localizedNames`` section maps Paratext book codes (e.g. ``MAT``, ``ROM``, ``1CO``) to localized display names in one or more languages.  
-Example:
-
-::
-
-   "MAT": {
-     "short": {"en": "Matthew"},
-     "long": {"en": "The Gospel according to Matthew"}
-   }
-
--------------------------
-typesetAsVersedParagraphs
--------------------------
-
-A consumer hint for presentation. When this flag is present, each verse or verse range should be displayed as a separate paragraph, regardless of paragraph markers in the USFM. When absent, consumers should respect paragraph markers as encoded.
-
-===================
-Schema Conformance
-===================
-
-A valid Scripture Text burrito **must include**:
-
-+--------------------------+------------------------------------------------+
-| **Field**                | **Description**                                |
-+--------------------------+------------------------------------------------+
-| ``meta``                 | Source info and generation metadata            |
-| ``type.flavorType.name`` | ``"scripture"``                                |
-| ``type.flavorType.flavor`` | Must specify name, projectType, etc.        |
-| ``languages``            | One or more with BCP-47 tag and script         |
-| ``ingredients``          | Book files, versification, and locale data     |
-| ``versification.json``   | Copenhagen Alliance Versification definition   |
-+--------------------------+------------------------------------------------+
-
-Optional fields:
-
-* ``localizedNames`` — Recommended for user-facing tools  
-* ``license.json`` — Encouraged for public sharing  
-* ``custom.sty`` or ``styles.xml`` — Optional for rendering
-
-====================
-Illustrative Example
-====================
-
-::
-
-   {
-     "type": {
-       "flavorType": {
-         "name": "scripture",
-         "flavor": {
-           "name": "textTranslation",
-           "projectType": "standard",
-           "translationType": "firstTranslation",
-           "audience": "common",
-           "usfmVersion": "2.6.0"
-         }
-       }
-     },
-     "languages": [
-       {
-         "tag": "en",
-         "name": {"en": "English (eng)"},
-         "scriptDirection": "ltr"
-       }
-     ],
-     "ingredients": {
-       "ingredients/41MATEIEIO.SFM": {
-         "size": 160897,
-         "mimeType": "text/x-usfm",
-         "scope": {"MAT": []}
-       },
-       "ingredients/versification.json": {
-         "size": 27334,
-         "mimeType": "application/json",
-         "role": "versification"
-       },
-       "ingredients/en.ldml": {
-         "size": 3492,
-         "mimeType": "application/xml",
-         "role": "localedata"
-       }
-     }
-   }
-
-This structure corresponds to a typical Paratext-generated *Scripture Text* burrito, supporting USFM, USX, or USJ formats, and conforming fully to the Scripture Burrito schema.
-
+``typesetAsVersedParagraphs``
+    If present, consumers SHOULD render each verse or verse range as a
+    separate paragraph, ignoring paragraph markers in the source file.

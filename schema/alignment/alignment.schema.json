@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://burrito.bible/schema/alignment/alignment.schema.json",
+    "$$target": "alignment/alignment.schema.json",
+    "title": "Flavor Details: alignment",
+    "type": "object",
+    "description": "Schema of flavor field for alignment flavor. Content files follow the Scripture Burrito Alignment Format.",
+    "properties": {
+        "name": {
+            "const": "alignment"
+        }
+    },
+    "required": ["name"],
+    "additionalProperties": false
+}

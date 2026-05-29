@@ -5,6 +5,7 @@
     "title": "Flavor Details: alignment",
     "type": "object",
     "description": "Schema of flavor field for alignment flavor. Content files follow the Scripture Burrito Alignment Format.",
+    "$comment": "currentScope is intentionally not required for alignment burritos. Unlike scripture and audio burritos — where currentScope declares which books and chapters are present — alignment files record their own reference coverage internally (each alignment entry carries its source and target references). A top-level scope declaration would be redundant and would need to be kept in sync with the alignment content.",
     "properties": {
         "name": {
             "const": "alignment"

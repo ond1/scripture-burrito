@@ -13,8 +13,6 @@ Scripture Burrito Concepts
 
 .. include:: /includes/flavors.txt
 
-.. include:: /includes/reference_system.txt
-
 .. include:: /includes/ingredients.txt
 
 .. include:: /includes/conventions.txt

@@ -18,6 +18,14 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+# Patch sphinx-jsonschema to escape RST-special | characters in pattern values.
+import sphinx_jsonschema.wide_format as _wf
+_orig_escape = _wf.JsonSchemaTableDirective._escape
+def _patched_escape(self, text):
+    result = _orig_escape(self, text)
+    return result.replace('|', '\\|')
+_wf.JsonSchemaTableDirective._escape = _patched_escape
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.

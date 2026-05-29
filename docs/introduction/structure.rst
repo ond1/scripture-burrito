@@ -42,7 +42,7 @@ Top-Level Fields
     REQUIRED. See `Ingredients`_.
 
 ``languages``
-    REQUIRED for ``scripture`` and ``gloss`` flavor types. See `Languages`_.
+    REQUIRED for ``scripture`` flavor type. See `Languages`_.
 
 ``agencies``
     OPTIONAL. See `Agencies`_.
@@ -170,7 +170,7 @@ REQUIRED. At least one of ``publicDomain``, ``shortStatements``, or
 Languages
 =========
 
-REQUIRED for ``scripture`` and ``gloss`` flavor types. An array with one
+REQUIRED for ``scripture`` flavor type. An array with one
 entry per language present in the translation. Each entry MUST have:
 
 * ``tag`` (REQUIRED): a BCP-47 language tag (e.g. ``"dje"``, ``"en"``,

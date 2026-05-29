@@ -4,7 +4,7 @@
     "$$target": "derived_metadata.schema.json",
     "title": "Metadata (Derived)",
     "type": "object",
-    "description": "Scripture Burrito derived variant root.",
+    "description": "Root schema for derived burritos (meta.category = 'derived'). Derived burritos are produced from one or more source burritos — examples include back-translations, published editions, and study Bible additions.",
     "properties": {
         "format": {
             "type": "string",
@@ -40,9 +40,6 @@
         "copyright": {
             "$ref": "copyright.schema.json"
         },
-        "promotion": {
-            "$ref": "promotion.schema.json"
-        },
         "ingredients": {
             "$ref": "ingredients.schema.json"
         },
@@ -50,24 +47,39 @@
             "$ref": "localized_names.schema.json"
         },
         "recipe": {
+            "$comment": "recipe is from an unimplemented 'ecosystem servers' concept where a server would process a list of operations to deliver derived content. It is retained as an optional field for backwards compatibility but is not required. See https://github.com/bible-technology/scripture-burrito/issues/345",
             "$ref": "recipe.schema.json"
         }
     },
-    "required": ["format", "meta", "idAuthorities", "identification", "confidential", "copyright", "type", "recipe"],
+    "required": ["format", "meta", "idAuthorities", "identification", "confidential", "copyright", "type"],
     "additionalProperties": false,
-    "if": {
-        "properties": {
-            "type": {
-                "type": "object",
+    "allOf": [
+        {
+            "$comment": "languages is required for scripture burritos. See https://github.com/bible-technology/scripture-burrito/issues/343 for the bug this fixes.",
+            "if": {
                 "properties": {
-                    "flavorType": {
-                        "enum": ["scripture", "gloss"]
+                    "type": {
+                        "type": "object",
+                        "properties": {
+                            "flavorType": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "enum": ["scripture"]
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+            },
+            "then": {
+                "required": ["languages"]
             }
+        },
+        {
+            "$comment": "Requires a rightsHolder agency when content is not public domain. Was missing from derived_metadata — see https://github.com/bible-technology/scripture-burrito/issues/344",
+            "$ref": "copyright_constraints.schema.json"
         }
-    },
-    "then": {
-        "required": ["languages"]
-    }
+    ]
 }

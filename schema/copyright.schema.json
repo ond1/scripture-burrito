@@ -61,6 +61,7 @@
     "additionalProperties": false,
     "oneOf": [
         {
+            "description": "Option 1: content is public domain — set publicDomain to true; no license or statement required.",
             "type": "object",
             "properties": {
                 "publicDomain": {
@@ -70,10 +71,12 @@
             "required": ["publicDomain"]
         },
         {
+            "description": "Option 2: provide a short human-readable copyright or license statement (up to 500 characters, optionally in multiple languages).",
             "type": "object",
             "required": ["shortStatements"]
         },
         {
+            "description": "Option 3: point to the full license document, either as a URL or as a path to a file bundled as an ingredient in the burrito.",
             "type": "object",
             "required": ["licenses"]
         }

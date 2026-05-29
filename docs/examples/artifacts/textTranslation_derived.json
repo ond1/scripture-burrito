@@ -83,7 +83,7 @@
         "projectType": "standard",
         "audience": "common",
         "translationType": "newTranslation",
-        "usfmVersion": "3.1.rc49"
+        "usfmVersion": "3.1"
       }
     }
   },
@@ -95,7 +95,7 @@
     },
     {
       "relationType": "parascriptural",
-      "flavor": "x-wordAlignment",
+      "flavor": "alignment",
       "id": "agmt::irvmal-4-wh"
     }
   ],

@@ -27,6 +27,12 @@ Concepts
 Goals
 =====
 
+The goal of any standard is **interoperability** — making it possible for independently developed tools to exchange content without custom integration work. Scripture Burrito exists to serve that goal. Claiming conformance is not the goal — a specification that allows implementations to claim conformance without providing what is needed for interoperability does not serve its users.
+
+A flavor specification is worth writing only when two or more independent implementations need to interoperate; the working group generally requires some implementation experience before standardizing a new flavor, because real implementations reveal requirements that are invisible on paper. Before a flavor is accepted as part of the standard, the working group requires a **demonstrated interoperability test with real data** between two or more independent implementations. A specification and a single implementation are not sufficient.
+
+When the need for a new flavor standard is established, the working group brings together the people with a stake in that flavor — tool developers, content producers, and publishers — to create the specification collaboratively. The working group is also developing more efficient processes to keep specification work focused and avoid paralysis by analysis.
+
 #. Scripture Burrito is designed for **data interchange** between ecosystems and as a **portable archive format** for translation projects, covering all tools in the translation and publication process from initial drafting through checking, publication, and revision.
 
 #. Non-text formats such as audio and sign language are **first-class content**, not add-ons to a text translation.

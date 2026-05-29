@@ -13,3 +13,4 @@ Step-by-step guides for common Scripture Burrito tasks.
    alignment
    audioAlignment
    wrapper
+   derived

@@ -6,9 +6,7 @@ Scripture Burrito Documentation
 
 .. image:: ../logo/burrito_logo.png
 
-Scripture Burrito is a standard for packaging and describing Bible translation projects. If you are building tools that create, exchange, or archive Scripture translations — or if you need to move a translation project between tools — this specification tells you how to package it so that any conforming tool can understand what it contains.
-
-The core of Scripture Burrito is a metadata file that describes all the files in a project: what each file is, what part of Scripture it covers, and what role it plays. That metadata, together with the files it describes, is called a *burrito*. A burrito is not bound to a physical format, for instance, the same burrito can be distributed as a zip file, a directory, a GitHub repository, a database, or via API.
+Scripture Burrito is a standard for exchanging Bible translation projects between tools. At the core is a metadata file — the *burrito* — that describes every file in a project: what it contains, what part of Scripture it covers, and what role it plays. The same burrito can be stored as a zip file, a directory, a GitHub repository, a database, or delivered via API.
 
 All burritos share a common structure — see :ref:`burrito-structure`. Flavor-specific fields are documented below.
 

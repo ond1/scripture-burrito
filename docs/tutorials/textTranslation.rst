@@ -28,9 +28,15 @@ The directory currently looks like this::
 
 We will build the ``metadata.json`` file section by section.
 
-==========
+=============
+Common Fields
+=============
+
+*These fields are common to all burritos — see* :ref:`burrito-structure` *for the full specification.*
+
+---------
 1. Format
-==========
+---------
 
 Every burrito begins with the ``format`` field. This identifies the file as a
 Scripture Burrito rather than anything else::
@@ -40,9 +46,9 @@ Scripture Burrito rather than anything else::
 
 That single field is what every conforming tool checks first.
 
-===============
+---------------
 2. Meta section
-===============
+---------------
 
 The ``meta`` section records who generated this file and when::
 
@@ -67,9 +73,9 @@ The ``meta`` section records who generated this file and when::
   unless another is specified.
 * ``normalization`` — the Unicode normalization form of the text files.
 
-==========================
+--------------------------
 3. Identification section
-==========================
+--------------------------
 
 The ``identification`` section names the project in a human-readable way, and
 optionally links it to identifiers in external systems::
@@ -116,9 +122,9 @@ Library), add an ``idAuthorities`` section and reference it from
 For a new project with no external registry entry, you can omit
 ``idAuthorities`` and ``identification.primary`` entirely.
 
-=====================
+--------------------
 4. Languages section
-=====================
+--------------------
 
 The ``languages`` array lists every language present in the translation::
 
@@ -136,9 +142,63 @@ The ``languages`` array lists every language present in the translation::
   `ISO 639-3 <https://iso639-3.sil.org/>`_ for the three-letter code.
 * ``name`` follows the same locale-map pattern as ``identification.name``.
 
-===============
-5. Type section
-===============
+-------------------
+5. Agencies section
+-------------------
+
+The ``agencies`` array records which organisations are responsible for this
+content::
+
+     "agencies": [
+       {
+         "id": "https://seedcompany.com",
+         "roles": ["rightsHolder", "content"],
+         "url": "https://seedcompany.com",
+         "name": {
+           "en": "Seed Company"
+         },
+         "abbr": {
+           "en": "SC"
+         }
+       }
+     ],
+
+* ``roles`` is a list drawn from: ``"rightsHolder"``, ``"content"``,
+  ``"publication"``, ``"management"``, ``"finance"``, ``"qa"``.
+* ``id`` is a URI that uniquely identifies the agency. If the agency is
+  registered in an authority referenced in ``idAuthorities``, use that
+  authority's scoped format (e.g. ``"dbl::54650cfa5117ad690fb05fb6"``);
+  otherwise a stable URL for the organisation is fine.
+
+---------------------
+6. Common Ingredients
+---------------------
+
+The ``ingredients`` object maps every file path (relative to the burrito root)
+to a descriptor. These fields appear in every burrito regardless of flavor:
+
+* **file path** (the key) — relative to the burrito root, using forward
+  slashes. Must match the actual layout exactly.
+* **checksum** — used by receiving tools to verify file integrity. MD5 is
+  currently the standard algorithm.
+* **mimeType** — identifies the file format. Allowed values are
+  flavor-specific; see below.
+* **size** — file size in bytes.
+* **scope** — for text files, lists the books the file contains. Each book
+  code maps to either an empty array (whole book) or a list of chapter numbers.
+* **role** — for support files that are not primary text. Allowed values are
+  flavor-specific; see below.
+
+=====================
+Scripture Text Fields
+=====================
+
+*These fields are specific to the Scripture Text flavor — see*
+:ref:`scripture_text_flavor` *for the full specification.*
+
+---------------
+7. Type section
+---------------
 
 The ``type`` section declares the flavor — the kind of content this burrito
 contains. For a text translation::
@@ -174,41 +234,27 @@ contains. For a text translation::
   :ref:`scripture_text_flavor` for the full set of values.
 * ``projectType`` — ``"standard"`` for a normal translation.
 
-===================
-6. Agencies section
-===================
+------------------------------
+8. Flavor-Specific Ingredients
+------------------------------
 
-The ``agencies`` array records which organisations are responsible for this
-content::
+Text ingredients must use one of these MIME types:
 
-     "agencies": [
-       {
-         "id": "https://seedcompany.com",
-         "roles": ["rightsHolder", "content"],
-         "url": "https://seedcompany.com",
-         "name": {
-           "en": "Seed Company"
-         },
-         "abbr": {
-           "en": "SC"
-         }
-       }
-     ],
+* ``"text/x-usfm"`` for USFM files (``.SFM``, ``.USFM``)
+* ``"application/xml"`` for USX files
+* ``"application/json"`` for USJ files (also set ``"role": "text"``)
 
-* ``roles`` is a list drawn from: ``"rightsHolder"``, ``"content"``,
-  ``"publication"``, ``"management"``, ``"finance"``, ``"qa"``.
-* ``id`` is a URI that uniquely identifies the agency. If the agency is
-  registered in an authority referenced in ``idAuthorities``, use that
-  authority's scoped format (e.g. ``"dbl::54650cfa5117ad690fb05fb6"``);
-  otherwise a stable URL for the organisation is fine.
+Support file roles defined for this flavor:
 
-======================
-7. Ingredients section
-======================
+* ``"versification"`` — a ``versification.json`` defining the verse structure.
+  Should be present; must use ``"mimeType": "application/json"``.
+* ``"localedata"`` — an ``.ldml`` locale file. Should be present; must use
+  ``"mimeType": "application/xml"``.
 
-The ``ingredients`` object is the heart of the burrito. It maps every file path
-(relative to the burrito root) to a descriptor that tells consuming tools what
-the file is::
+Every book declared in ``type.flavorType.currentScope`` must have at least one
+text ingredient whose ``scope`` covers that book.
+
+The full ``ingredients`` object for the Zarma New Testament::
 
      "ingredients": {
        "ingredients/40MATZARMA.SFM": {
@@ -249,24 +295,9 @@ the file is::
        }
      }
 
-Key points:
-
-* **File paths** are relative to the burrito root, using forward slashes. They
-  must match the actual layout exactly.
-* **checksum** is used by receiving tools to verify file integrity. MD5 is
-  currently the standard algorithm.
-* **mimeType** identifies the file format. Use ``text/x-usfm`` for USFM,
-  ``application/xml`` for USX, ``application/json`` for USJ.
-* **scope** lists the books a text file contains. Each book code maps to either
-  an empty array (whole book) or a list of chapter numbers.
-* **role** is used for non-text support files. Required values: ``localedata``
-  for ``.ldml`` files, ``versification`` for versification definitions.
-* Every book listed in ``type.flavorType.currentScope`` must have at least one
-  ingredient with a matching scope entry.
-
-=======================
-8. The complete file
-=======================
+=================
+The complete file
+=================
 
 Putting it all together::
 
@@ -372,9 +403,9 @@ Putting it all together::
      }
    }
 
-==============
+==========
 Next steps
-==============
+==========
 
 * Add ``localizedNames`` to provide translated book names for display in tools
   — see the full :ref:`examples-textTranslation` for the pattern.

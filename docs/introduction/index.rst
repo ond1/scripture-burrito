@@ -4,7 +4,9 @@
 Overview
 ########
 
-Scripture Burrito is a standard for exchanging Bible translation projects between tools. A translation project contains dozens or hundreds of files; without a manifest, software has no way to know what each file contains, what role it plays, or how the pieces fit together. Scripture Burrito provides that manifest — a metadata file called a *burrito* — describing every file in the project: its format, its Scripture coverage, and its role. The files themselves are called *ingredients*. A burrito is not tied to a storage format; the same project can be a zip file, a directory, a GitHub repository, a database, or an API payload.
+A Bible translation project contains hundreds of files. Different tools organize them differently — the same project looks completely different on disk in Paratext, Translation Core, or a publishing pipeline: different file names, different directory layouts, different conventions. Some tools store projects as directory trees or zip files; others use GitHub repositories. Projects may also be delivered via API. When one tool passes a project to another, the receiving tool has no way to know what each file contains, what part of Scripture it covers, or what role it plays.
+
+Scripture Burrito solves this by putting a machine-readable metadata file — the *burrito* — at the center of every project. The burrito describes every file: its format, its Scripture coverage, and its role. Tools use the burrito to exchange, load, and store projects reliably, regardless of how the project is stored.
 
 Burritos are organized by *flavor*, which describes the kind of content the project contains.
 

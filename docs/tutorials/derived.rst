@@ -20,20 +20,29 @@ a directory called ``zarma-nt-bt/``::
             40MATBACKTR.SFM
         metadata.json
 
-==========
+=============
+Common Fields
+=============
+
+*These fields are common to all burritos — see* :ref:`burrito-structure` *for the full specification.*
+
+---------
 1. Format
-==========
+---------
 
 The ``format`` field is the same for all burritos::
 
     {
       "format": "scripture burrito",
 
-==================
-2. Meta: category
-==================
+---------------
+2. Meta section
+---------------
 
-The key difference from a source burrito is ``meta.category``::
+The ``meta`` section is common to all burritos. For a derived burrito, set
+``category`` to ``"derived"`` — this tells consuming tools that this burrito
+was produced from another, so a tool that receives an update to the source can
+flag that this derived burrito may need to be regenerated::
 
       "meta": {
         "version": "1.0.0",
@@ -48,17 +57,13 @@ The key difference from a source burrito is ``meta.category``::
         "normalization": "NFC"
       },
 
-Setting ``category`` to ``"derived"`` tells consuming tools that this burrito
-was produced from another. A tool that receives an update to the source Zarma
-NT can flag that this back-translation may need to be regenerated.
+--------------------------
+3. Identification section
+--------------------------
 
-================================
-3. Identification and upstream
-================================
-
-The ``identification.upstream`` field records which external burrito this was
-derived from. Its structure mirrors ``identification.primary``: keys are
-authority names from ``idAuthorities``, values are arrays of source identifiers::
+The ``identification`` section names the project. If the project is registered
+in an external system (such as the Digital Bible Library), declare that
+authority in ``idAuthorities`` and reference it from ``identification.primary``::
 
       "idAuthorities": {
         "dbl": {
@@ -73,7 +78,72 @@ authority names from ``idAuthorities``, values are arrays of source identifiers:
         "description": {
           "en": "English back-translation of Zarma Matthew for consultant checking"
         },
-        "abbreviation": {"en": "ZJNT-BT"},
+        "abbreviation": {"en": "ZJNT-BT"}
+      },
+
+------------
+4. Languages
+------------
+
+A back-translation is typically in the consultant's language::
+
+      "languages": [
+        {
+          "tag": "en",
+          "name": {"en": "English"}
+        }
+      ],
+
+-----------
+5. Agencies
+-----------
+
+::
+
+      "agencies": [
+        {
+          "id": "https://seedcompany.com",
+          "roles": ["content"],
+          "url": "https://seedcompany.com",
+          "name": {"en": "Seed Company"},
+          "abbr": {"en": "SC"}
+        }
+      ],
+
+---------------------
+6. Common Ingredients
+---------------------
+
+The ``ingredients`` object maps every file path (relative to the burrito root)
+to a descriptor. These fields appear in every burrito regardless of flavor:
+
+* **file path** (the key) — relative to the burrito root, using forward
+  slashes. Must match the actual layout exactly.
+* **checksum** — used by receiving tools to verify file integrity. MD5 is
+  currently the standard algorithm.
+* **mimeType** — identifies the file format. Allowed values are
+  flavor-specific; see below.
+* **size** — file size in bytes.
+* **scope** — lists the books the file contains. Each book code maps to either
+  an empty array (whole book) or a list of chapter numbers.
+
+======================
+Derived Burrito Fields
+======================
+
+*These fields are specific to derived burritos — see* :ref:`derived_flavor`
+*for the full specification.*
+
+-----------------------
+7. Upstream reference
+-----------------------
+
+The ``identification.upstream`` field records which external burrito this was
+derived from. Its structure mirrors ``identification.primary``: keys are
+authority names from ``idAuthorities``, values are arrays of source identifiers::
+
+      "identification": {
+        ...
         "upstream": {
           "dbl": [
             {
@@ -87,27 +157,14 @@ authority names from ``idAuthorities``, values are arrays of source identifiers:
       },
 
 * ``upstream`` is optional if the source is not registered in an external
-  authority. In that case use ``relationships`` (see step 7).
+  authority. In that case use ``relationships`` (see below).
 
-=====================
-4. Languages
-=====================
-
-A back-translation is typically in the consultant's language::
-
-      "languages": [
-        {
-          "tag": "en",
-          "name": {"en": "English"}
-        }
-      ],
-
-===========
-5. Type
-===========
+---------------
+8. Type section
+---------------
 
 The type section uses the same flavor as the source but sets ``projectType``
-to ``"backTranslation"``::
+to indicate the derived relationship::
 
       "type": {
         "flavorType": {
@@ -131,28 +188,12 @@ to ``"backTranslation"``::
 * ``translationType: "newTranslation"`` — it is a fresh rendering, not a
   revision of an existing English text.
 
-==============
-6. Agencies
-==============
+------------------------------
+9. Flavor-Specific Ingredients
+------------------------------
 
-::
-
-      "agencies": [
-        {
-          "id": "https://seedcompany.com",
-          "roles": ["content"],
-          "url": "https://seedcompany.com",
-          "name": {"en": "Seed Company"},
-          "abbr": {"en": "SC"}
-        }
-      ],
-
-================
-7. Ingredients
-================
-
-The back-translation file is listed the same way as any other text
-ingredient::
+The back-translation file is a USFM text ingredient, using the same mimeType
+values as the Scripture Text flavor (see :ref:`scripture_text_flavor`)::
 
       "ingredients": {
         "ingredients/40MATBACKTR.SFM": {
@@ -163,9 +204,9 @@ ingredient::
         }
       },
 
-==================
-8. Relationships
-==================
+-----------------
+10. Relationships
+-----------------
 
 The ``relationships`` array formally declares the link to the source burrito.
 This complements ``identification.upstream`` and is useful even when the source
@@ -185,9 +226,9 @@ is not registered externally, because it lets any tool follow the provenance::
 * ``flavor`` — the flavor of the source burrito.
 * ``id`` — prefixed with the ``dbl`` authority declared in ``idAuthorities``.
 
-======================
-9. The complete file
-======================
+=================
+The complete file
+=================
 
 Putting it all together::
 
@@ -278,9 +319,9 @@ Putting it all together::
       ]
     }
 
-=============
+==========
 Next steps
-=============
+==========
 
 * Add more books to ``currentScope`` and ``ingredients`` as the back-translation
   grows.

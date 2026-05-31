@@ -26,9 +26,15 @@ The directory looks like this::
 
 We will build the ``metadata.json`` file section by section.
 
-=====================
+=============
+Common Fields
+=============
+
+*These fields are common to all burritos — see* :ref:`burrito-structure` *for the full specification.*
+
+-------------------
 1. Format and meta
-=====================
+-------------------
 
 Every burrito begins the same way::
 
@@ -46,9 +52,9 @@ Every burrito begins the same way::
        "dateCreated": "2025-11-05T10:00:00+01:00"
      },
 
-==========================
+--------------------------
 2. Identification section
-==========================
+--------------------------
 
 Name the project so tools and people can identify it::
 
@@ -64,9 +70,9 @@ Name the project so tools and people can identify it::
        }
      },
 
-=====================
+--------------------
 3. Languages section
-=====================
+--------------------
 
 An alignment burrito typically involves two languages. List both::
 
@@ -81,9 +87,49 @@ An alignment burrito typically involves two languages. List both::
        }
      ],
 
-===============
-4. Type section
-===============
+-------------------
+4. Agencies section
+-------------------
+
+::
+
+     "agencies": [
+       {
+         "id": "https://seedcompany.com",
+         "roles": ["rightsHolder", "content"],
+         "url": "https://seedcompany.com",
+         "name": {"en": "Seed Company"},
+         "abbr": {"en": "SC"}
+       }
+     ],
+
+---------------------
+5. Common Ingredients
+---------------------
+
+The ``ingredients`` object maps every file path (relative to the burrito root)
+to a descriptor. These fields appear in every burrito regardless of flavor:
+
+* **file path** (the key) — relative to the burrito root, using forward
+  slashes. Must match the actual layout exactly.
+* **checksum** — used by receiving tools to verify file integrity. MD5 is
+  currently the standard algorithm.
+* **mimeType** — identifies the file format. Allowed values are
+  flavor-specific; see below.
+* **size** — file size in bytes.
+* **scope** — lists the books the file contains. Each book code maps to either
+  an empty array (whole book) or a list of chapter numbers.
+
+================
+Alignment Fields
+================
+
+*These fields are specific to the Alignment flavor — see*
+:ref:`alignment_flavor` *for the full specification.*
+
+---------------
+6. Type section
+---------------
 
 The ``type`` section declares this as an alignment burrito::
 
@@ -102,27 +148,15 @@ The ``type`` section declares this as an alignment burrito::
 * Unlike scripture burritos, ``currentScope`` is not required — the alignment
   files themselves record which references are covered.
 
-===================
-5. Agencies section
-===================
+------------------------------
+7. Flavor-Specific Ingredients
+------------------------------
+
+Alignment files use ``"application/json"`` as their MIME type. The ``scope``
+records which book each file covers, using the same book-scope pattern as text
+translation ingredients.
 
 ::
-
-     "agencies": [
-       {
-         "id": "https://seedcompany.com",
-         "roles": ["rightsHolder", "content"],
-         "url": "https://seedcompany.com",
-         "name": {"en": "Seed Company"},
-         "abbr": {"en": "SC"}
-       }
-     ],
-
-======================
-6. Ingredients section
-======================
-
-Each alignment file is listed as an ingredient::
 
      "ingredients": {
        "alignments/40MAT-dje-sblgnt.json": {
@@ -151,13 +185,9 @@ Each alignment file is listed as an ingredient::
        }
      }
 
-* ``mimeType`` is ``application/json`` for all alignment files.
-* ``scope`` records which book each file covers. This is the same book-scope
-  pattern used in text translation ingredients.
-
-=========================================
-7. Structure of an alignment content file
-=========================================
+-----------------------------------------
+8. Structure of an alignment content file
+-----------------------------------------
 
 The ingredient files follow the
 `Scripture Burrito Alignment Format <https://github.com/bible-technology/alignment-spec>`_.
@@ -211,9 +241,9 @@ Key points:
 * ``meta.confidence`` records the aligner's confidence for each record.
   Individual records can add or override metadata hoisted from the group.
 
-=======================
-8. The complete file
-=======================
+=================
+The complete file
+=================
 
 Putting the metadata together::
 
@@ -296,9 +326,9 @@ Putting the metadata together::
      }
    }
 
-==============
+==========
 Next steps
-==============
+==========
 
 * Add a ``relationships`` section to link this alignment burrito to the Zarma
   text translation burrito it was produced from — use ``"relationType": "source"``.

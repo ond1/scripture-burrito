@@ -45,9 +45,16 @@ Each burrito is a self-contained Scripture Burrito package in its own
 subdirectory. The ``wrapper.json`` file lives at the project root and records
 which burritos belong to this project.
 
-===========
+==============
+Wrapper Fields
+==============
+
+*All fields below are specific to the wrapper format — see* :ref:`wrapper_flavor`
+*for the full specification.*
+
+---------
 1. Format
-===========
+---------
 
 Every wrapper file begins with the ``format`` field. This is the discriminator
 that tells tools they are reading a wrapper rather than a regular burrito::
@@ -57,9 +64,9 @@ that tells tools they are reading a wrapper rather than a regular burrito::
 
 Any conforming tool checks this field first to identify the file type.
 
-===============
+---------------
 2. Meta section
-===============
+---------------
 
 The ``meta`` section records administrative information about the wrapper
 itself — not about the individual burritos::
@@ -97,9 +104,9 @@ Key fields:
 * ``defaultLocale`` — the BCP-47 language tag for the default locale of the
   localized text fields above.
 
-===================
+-------------------
 3. Contents section
-===================
+-------------------
 
 The ``contents`` section is the heart of the wrapper. It lists every burrito
 that belongs to this project::
@@ -145,9 +152,9 @@ Each entry in the ``burritos`` array has three required fields:
 
 The array must contain at least one entry.
 
-=======================
-4. The complete file
-=======================
+=================
+The complete file
+=================
 
 Putting it all together::
 
@@ -212,9 +219,9 @@ A valid file prints ``No errors.`` If you see validation errors, check:
 * ``role`` is one of ``"source"``, ``"derived"``, ``"supplemental"``, or a
   value beginning with ``"x-"``.
 
-==============
+==========
 Next steps
-==============
+==========
 
 * See :ref:`examples-wrapper` for the full example file used in this tutorial.
-* For the complete field reference see :ref:`schema_docs-wrapper-metadata`.
+* For the complete field reference see :ref:`wrapper_flavor`.

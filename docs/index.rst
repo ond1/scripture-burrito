@@ -12,20 +12,24 @@ All burritos share a common structure — see :ref:`burrito-structure`. Flavor-s
 
 Scripture Burrito currently defines these flavors:
 
-- :ref:`scripture_text_flavor` — USFM, USX, or USJ text translations
+.. Note: flavor names below are plain text (not :ref: links) to avoid showing
+   "Scripture Text Specification" as a redundant link — the Specification link
+   already appears in the [Specification | Tutorial | Example] bracket.
+
+- Scripture Text — USFM, USX, or USJ text translations
   [:ref:`Specification <scripture_text_flavor>` | :ref:`Tutorial <tutorial-textTranslation>` | :ref:`Example <examples-textTranslation>`]
-- :ref:`scripture_audio_flavor` — recorded audio translations
+- Scripture Audio — recorded audio translations
   [:ref:`Specification <scripture_audio_flavor>` | :ref:`Tutorial <tutorial-audioTranslation>` | :ref:`Example <examples-audioTranslation>`]
-- :ref:`alignment_flavor` — word-level or timecode alignment between two texts
+- Alignment — word-level or timecode alignment between two texts
   [:ref:`Specification <alignment_flavor>` | :ref:`Tutorial <tutorial-alignment>` | :ref:`Example <examples-alignment>`]
-- :ref:`wrapper_flavor` — groups related burritos together, such as a text and audio burrito for the same translation
+- Wrapper — groups related burritos together, such as a text and audio burrito for the same translation
   [:ref:`Specification <wrapper_flavor>` | :ref:`Tutorial <tutorial-wrapper>` | :ref:`Example <examples-wrapper>`]
 
 Any flavor can also be extended:
 
-- :ref:`derived_flavor` — burritos produced from other burritos, such as back-translations and publication artifacts
+- Derived — burritos produced from other burritos, such as back-translations and publication artifacts
   [:ref:`Specification <derived_flavor>` | :ref:`Tutorial <tutorial-derived>` | :ref:`Example <examples-textTranslation_derived>`]
-- :ref:`custom_flavors` — defining your own nonstandard flavor using the ``x-`` prefix
+- Custom — defining your own nonstandard flavor using the ``x-`` prefix
   [:ref:`Specification <custom_flavors>`]
 
 Documentation

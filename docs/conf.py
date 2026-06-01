@@ -19,12 +19,17 @@
 
 
 # Patch sphinx-jsonschema to escape RST-special | characters in pattern values.
-import sphinx_jsonschema.wide_format as _wf
-_orig_escape = _wf.WideFormat._escape
-def _patched_escape(self, text):
-    result = _orig_escape(self, text)
-    return result.replace('|', '\\|')
-_wf.WideFormat._escape = _patched_escape
+# Wrapped in try/except: if the version on this host lacks _escape, skip the
+# patch rather than crashing conf.py and killing the entire build.
+try:
+    import sphinx_jsonschema.wide_format as _wf
+    _orig_escape = _wf.WideFormat._escape
+    def _patched_escape(self, text):
+        result = _orig_escape(self, text)
+        return result.replace('|', '\\|')
+    _wf.WideFormat._escape = _patched_escape
+except (ImportError, AttributeError):
+    pass
 
 # -- General configuration ------------------------------------------------
 

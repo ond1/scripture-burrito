@@ -14,7 +14,7 @@ Scripture Burrito is a standard for exchanging Bible translation projects betwee
 
 All burritos share a common structure — see :ref:`burrito-structure`. Flavor-specific fields are documented below.
 
-Scripture Burrito currently defines these flavors:
+This Scripture Burrito specification defines these flavors:
 
 .. Note: flavor names below are plain text (not :ref: links) to avoid showing
    "Scripture Text Specification" as a redundant link — the Specification link
@@ -35,6 +35,13 @@ Any flavor can also be extended:
   [:ref:`Specification <derived_flavor>` | :ref:`Tutorial <tutorial-derived>` | :ref:`Example <examples-textTranslation_derived>`]
 - Custom — defining your own nonstandard flavor using the ``x-`` prefix
   [:ref:`Specification <custom_flavors>`]
+
+The following beta flavors are defined in Scripture Burrito v1.0.0.  When a beta flavor reaches release status, it will be added to this specification.
+
+- `Scripture Print <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_print_flavor.html>`_
+- `Scripture Sign Language <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_sign_language_flavor.html>`_
+- `Scripture Braille <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_braille_flavor.html>`_
+- `Scriptural Text Stories <https://docs.burrito.bible/en/v1.0.0/flavors/scriptural_text_stories_flavor.html>`_
 
 Documentation
 =============

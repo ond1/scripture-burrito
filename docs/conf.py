@@ -19,17 +19,39 @@
 
 
 # Patch sphinx-jsonschema to escape RST-special | characters in pattern values.
-# Wrapped in try/except: if the version on this host lacks _escape, skip the
-# patch rather than crashing conf.py and killing the entire build.
-try:
-    import sphinx_jsonschema.wide_format as _wf
-    _orig_escape = _wf.WideFormat._escape
-    def _patched_escape(self, text):
-        result = _orig_escape(self, text)
-        return result.replace('|', '\\|')
-    _wf.WideFormat._escape = _patched_escape
-except (ImportError, AttributeError):
-    pass
+# A regex `pattern` such as "a|b" contains pipes, which docutils reads as
+# substitution-reference syntax (|name|) and reports as undefined-substitution
+# errors. Escaping the pipes (| -> \|) renders them literally.
+#
+# The extension is registered under the name 'sphinx-jsonschema' (hyphen), which
+# Python imports as a DIFFERENT module object than 'sphinx_jsonschema' (underscore);
+# both are installed. We therefore patch whichever variant is importable so the fix
+# lands on the class Sphinx actually loads. Each is wrapped in try/except so a
+# missing/changed module never crashes conf.py and kills the whole build.
+import importlib
+
+
+def _install_pipe_escape(module_name):
+    try:
+        wf = importlib.import_module(module_name + '.wide_format')
+    except ImportError:
+        return
+    try:
+        orig = wf.WideFormat._escape
+    except AttributeError:
+        return
+    if getattr(orig, '_pipe_escaped', False):
+        return  # already patched (e.g. same class reached via both names)
+
+    def _patched_escape(self, text, _orig=orig):
+        return _orig(self, text).replace('|', '\\|')
+
+    _patched_escape._pipe_escaped = True
+    wf.WideFormat._escape = _patched_escape
+
+
+for _sjs_name in ('sphinx-jsonschema', 'sphinx_jsonschema'):
+    _install_pipe_escape(_sjs_name)
 
 # -- General configuration ------------------------------------------------
 

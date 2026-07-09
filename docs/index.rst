@@ -38,10 +38,10 @@ Any flavor can also be extended:
 
 The following beta flavors are defined in Scripture Burrito v1.0.0.  When a beta flavor reaches release status, it will be added to this specification.
 
-- `Scripture Print <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_print_flavor.html>`_
-- `Scripture Sign Language <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_sign_language_flavor.html>`_
-- `Scripture Braille <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_braille_flavor.html>`_
-- `Scriptural Text Stories <https://docs.burrito.bible/en/v1.0.0/flavors/scriptural_text_stories_flavor.html>`_
+- `Scripture Print (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_print_flavor.html>`_
+- `Scripture Sign Language (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_sign_language_flavor.html>`_
+- `Scripture Braille (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_braille_flavor.html>`_
+- `Scriptural Text Stories (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scriptural_text_stories_flavor.html>`_
 
 Documentation
 =============

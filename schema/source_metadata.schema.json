@@ -2,9 +2,9 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://burrito.bible/schema/source_metadata.schema.json",
     "$$target": "source_metadata.schema.json",
-    "title": "Metadata (Default)",
+    "title": "Metadata (Source)",
     "type": "object",
-    "description": "Scripture Burrito source kinda-variant root.",
+    "description": "Root schema for source burritos (meta.category = 'source'). Source burritos represent original translation work at any stage from initial draft through checking and revision.",
     "properties": {
         "format": {
             "type": "string",
@@ -54,13 +54,19 @@
     "additionalProperties": false,
     "allOf": [
         {
+            "$comment": "languages is required for scripture burritos. The enum is kept (rather than const) to allow future flavor types that may also require languages. See https://github.com/bible-technology/scripture-burrito/issues/343 for the bug this fixes.",
             "if": {
                 "properties": {
                     "type": {
                         "type": "object",
                         "properties": {
                             "flavorType": {
-                                "enum": ["scripture", "gloss"]
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "enum": ["scripture"]
+                                    }
+                                }
                             }
                         }
                     }

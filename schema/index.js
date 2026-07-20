@@ -12,7 +12,6 @@ module.exports = {
         require("./copyright_constraints.schema.json"),
         require("./derived_meta.schema.json"),
         require("./derived_metadata.schema.json"),
-        require("./gloss/text_stories.schema.json"),
         require("./identification.schema.json"),
         require("./id_authorities.schema.json"),
         require("./ingredient.schema.json"),
@@ -37,10 +36,7 @@ module.exports = {
         require("./relationships.schema.json"),
         require("./relationship.schema.json"),
         require("./scripture/audio_translation.schema.json"),
-        require("./scripture/embossed_braille_scripture.schema.json"),
-        require("./scripture/sign_language_video_translation.schema.json"),
         require("./scripture/text_translation.schema.json"),
-        require("./scripture/typeset_scripture.schema.json"),
         require("./role.schema.json"),
         require("./scope.schema.json"),
         require("./software_and_user_info.schema.json"),
@@ -50,7 +46,7 @@ module.exports = {
         require("./target_area.schema.json"),
         require("./template_meta.schema.json"),
         require("./template_metadata.schema.json"),
-        require("./type.schema.json"),
+        require("./type.validation.schema.json"),
         require("./unm49.schema.json"),
         require("./x_flavor.schema.json")
     ]

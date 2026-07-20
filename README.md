@@ -14,16 +14,7 @@ If you want to suggest a change, please fork this repo and create a PR, or creat
 
 ## Building
 
-Install the sphinx engine
-
-    sudo apt-get install python-sphinx
-    pip install sphinx-jsonschema
-
-Then run the build script from the docs/ directory.
-
-> NOTE: this top level makefile is just a shorcut to building the html.
-
-    make
+See [INSTALL.md](INSTALL.md) for instructions on building the documentation locally.
 
 ## Documentation Format
 

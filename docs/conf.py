@@ -18,6 +18,41 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+# Patch sphinx-jsonschema to escape RST-special | characters in pattern values.
+# A regex `pattern` such as "a|b" contains pipes, which docutils reads as
+# substitution-reference syntax (|name|) and reports as undefined-substitution
+# errors. Escaping the pipes (| -> \|) renders them literally.
+#
+# The extension is registered under the name 'sphinx-jsonschema' (hyphen), which
+# Python imports as a DIFFERENT module object than 'sphinx_jsonschema' (underscore);
+# both are installed. We therefore patch whichever variant is importable so the fix
+# lands on the class Sphinx actually loads. Each is wrapped in try/except so a
+# missing/changed module never crashes conf.py and kills the whole build.
+import importlib
+
+
+def _install_pipe_escape(module_name):
+    try:
+        wf = importlib.import_module(module_name + '.wide_format')
+    except ImportError:
+        return
+    try:
+        orig = wf.WideFormat._escape
+    except AttributeError:
+        return
+    if getattr(orig, '_pipe_escaped', False):
+        return  # already patched (e.g. same class reached via both names)
+
+    def _patched_escape(self, text, _orig=orig):
+        return _orig(self, text).replace('|', '\\|')
+
+    _patched_escape._pipe_escaped = True
+    wf.WideFormat._escape = _patched_escape
+
+
+for _sjs_name in ('sphinx-jsonschema', 'sphinx_jsonschema'):
+    _install_pipe_escape(_sjs_name)
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -49,7 +84,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Scripture Burrito'
-copyright = u'2023'
+copyright = u'2020-2026 Contributors, CC BY-SA 4.0'
 author = u'Scripture Burrito Working Group'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -66,7 +101,7 @@ release = u'1.0.0'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -75,7 +110,7 @@ language = None
 #
 # Else, today_fmt is used as the format for a strftime call.
 #
-# today_fmt = '%B %d, %Y'
+today_fmt = '%d %B %Y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

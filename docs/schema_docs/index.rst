@@ -8,12 +8,13 @@ Schema Documentation
    design
    agencies
    agency
+   alignment
    common
    confidential
    copyright
+   copyright_constraints
    derived_meta
    derived_metadata
-   gloss-text_stories
    id_authorities
    identification
    ingredient
@@ -39,10 +40,7 @@ Schema Documentation
    role
    scope
    scripture-audio_translation
-   scripture-embossed_braille_scripture
-   scripture-sign_language_video_translation
    scripture-text_translation
-   scripture-typeset_scripture
    scripture_flavor_type
    software_and_user_info
    source_meta
@@ -53,4 +51,11 @@ Schema Documentation
    template_metadata
    type
    unm49
+   wrapper-metadata
+   wrapper-meta
+   wrapper-contents
+   wrapper-burrito
+   wrapper-generator
+   wrapper-meta_version
+   wrapper-meta_date_created
    x_flavor

@@ -4,7 +4,7 @@
     "$$target": "metadata.schema.json",
     "title": "Metadata",
     "type": "object",
-    "description": "Scripture Burrito root metadata object.",
+    "description": "Scripture Burrito root metadata object. The required fields and constraints depend on meta.category: 'source' burritos are validated against source_metadata, 'derived' burritos against derived_metadata, and 'template' burritos against template_metadata.",
     "properties": {
         "meta": {
             "type": "object",
@@ -16,6 +16,7 @@
         }
     },
     "if": {
+        "description": "Condition: meta.category is 'source'",
         "properties": {
             "meta": {
                 "type": "object",
@@ -28,10 +29,12 @@
         }
     },
     "then": {
+        "description": "Then (meta.category is 'source'): validate against source_metadata.",
         "$ref": "source_metadata.schema.json"
     },
     "else": {
         "if": {
+            "description": "Condition: meta.category is 'derived'",
             "properties": {
                 "meta": {
                     "type": "object",
@@ -44,9 +47,11 @@
             }
         },
         "then": {
+            "description": "Then (meta.category is 'derived'): validate against derived_metadata.",
             "$ref": "derived_metadata.schema.json"
         },
         "else": {
+            "description": "Else (meta.category is 'template'): validate against template_metadata.",
             "$ref": "template_metadata.schema.json"
         }
     }

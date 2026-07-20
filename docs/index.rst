@@ -1,39 +1,57 @@
 .. You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Scripture Burrito Documentation
-===============================
+Scripture Burrito Specification
+================================
+
+:Status: Working Draft
+:Date: |today|
 
 .. image:: ../logo/burrito_logo.png
+   :width: 625px
 
-After several years of development and testing, we are pleased to announce the availability of **Scripture Burrito 1.0.0** specification! We recommend that developers of Scripture and Scripture-related applications test and adopt this specification for interchanging data with other systems. Out of the box Scripture Burrito is designed to support the following types of data:
+Scripture Burrito is a standard for exchanging Bible translation projects between tools. At the core is a metadata file — the *burrito* — that describes every file in a project: what it contains, what part of Scripture it covers, and what role it plays. The same burrito can be stored as a zip file, a directory, a GitHub repository, a database, or delivered via API.
 
-- :ref:`scripture_text_flavor`
-- :ref:`scripture_print_flavor` (beta)
-- :ref:`scripture_audio_flavor` (beta)
-- :ref:`scripture_sign_language_flavor` (beta)
-- :ref:`scripture_braille_flavor` (beta)
-- :ref:`scriptural_text_stories_flavor` (beta)
+All burritos share a common structure — see :ref:`burrito-structure`. Flavor-specific fields are documented below.
 
-As interoperability is our primary goal, we are happy to accept proposals for new flavors based on common interchange scenarios. We have provided instructions and examples for :ref:`extending_scripture_burrito` by testing and implementing new flavors (using ``x-`` flavors). When multiple implementations can be demonstrated, we will consider adding them as official flavors in new schema releases.
+This Scripture Burrito specification defines these flavors:
 
-If you learn best by example, see the `minimal flavor examples <https://github.com/bible-technology/sb_minimalFlavorExamples>`_.
+.. Note: flavor names below are plain text (not :ref: links) to avoid showing
+   "Scripture Text Specification" as a redundant link — the Specification link
+   already appears in the [Specification | Tutorial | Example] bracket.
 
-This work has been a multi-year collaboration between several organizations, including `American Bible Society <https://americanbible.org/>`_, `Clear.Bible <https://www.clear.bible/>`_, `Eldarion <https://eldarion.com/>`_, `Bridge Connectivity Solutions <https://bridgeconn.com/>`_, `SIL <https://www.sil.org/>`_, `unfoldingWord <https://www.unfoldingword.org/>`_, `United Bible Societies <https://unitedbiblesocieties.org/>`_, and the work has been sponsored by `illumiNations <https://illuminations.bible/>`_.
+- Scripture Text — USFM, USX, or USJ text translations
+  [:ref:`Specification <scripture_text_flavor>` | :ref:`Tutorial <tutorial-textTranslation>` | :ref:`Example <examples-textTranslation>`]
+- Scripture Audio — recorded audio translations
+  [:ref:`Specification <scripture_audio_flavor>` | :ref:`Tutorial <tutorial-audioTranslation>` | :ref:`Example <examples-audioTranslation>`]
+- Alignment — word-level or timecode alignment between two texts
+  [:ref:`Specification <alignment_flavor>` | :ref:`Tutorial <tutorial-alignment>` | :ref:`Example <examples-alignment>`]
+- Wrapper — groups related burritos together, such as a text and audio burrito for the same translation
+  [:ref:`Specification <wrapper_flavor>` | :ref:`Tutorial <tutorial-wrapper>` | :ref:`Example <examples-wrapper>`]
 
-Future Development
-==================
+Any flavor can also be extended:
 
-See future development `milestones here <https://github.com/bible-technology/scripture-burrito/milestones>`_. The Scripture Burrito :ref:`committee` invites comments on all aspects of the schema and documentation. Please use `Github Issues <https://github.com/bible-technology/scripture-burrito/issues>`_ or `Github Discussions <https://github.com/bible-technology/scripture-burrito/discussions>`_ to provide feedback.
+- Derived — burritos produced from other burritos, such as back-translations and publication artifacts
+  [:ref:`Specification <derived_flavor>` | :ref:`Tutorial <tutorial-derived>` | :ref:`Example <examples-textTranslation_derived>`]
+- Custom — defining your own nonstandard flavor using the ``x-`` prefix
+  [:ref:`Specification <custom_flavors>`]
 
+The following beta flavors are defined in Scripture Burrito v1.0.0.  When a beta flavor reaches release status, it will be added to this specification.
+
+- `Scripture Print (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_print_flavor.html>`_
+- `Scripture Sign Language (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_sign_language_flavor.html>`_
+- `Scripture Braille (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scripture_braille_flavor.html>`_
+- `Scriptural Text Stories (beta) <https://docs.burrito.bible/en/v1.0.0/flavors/scriptural_text_stories_flavor.html>`_
 
 Documentation
 =============
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    introduction/index
+   introduction/structure
+   tutorials/index
    schema_docs/index
    flavors/index
    examples/index

@@ -1,6 +1,14 @@
-Scripture Burritos are grouped into four **flavor types**, depending on its relationship to Scripture:
+Burritos currently come in four **flavors**:
 
-1. Scripture
-2. Gloss - includes narratives, stories, etc.
-3. Parascriptural - includes anything indexed by book, chapter, verse that is not Scripture, e.g. commentaries or syntactic notes.
-4. Peripheral - any other resource related to Scripture
+* **Text Translation** — a Scripture text in USFM, USX, or USJ format
+  [:ref:`Specification <scripture_text_flavor>` | :ref:`Tutorial <tutorial-textTranslation>` | :ref:`Example <examples-textTranslation>`]
+* **Audio Translation** — a recorded audio translation
+  [:ref:`Specification <scripture_audio_flavor>` | :ref:`Tutorial <tutorial-audioTranslation>` | :ref:`Example <examples-audioTranslation>`]
+* **Alignment** — word-level alignment between two texts, such as a translation and a source language
+  [:ref:`Specification <alignment_flavor>` | :ref:`Tutorial <tutorial-alignment>` | :ref:`Example <examples-alignment>`]
+* **Wrapper** — groups related burritos together, such as a text and audio burrito for the same translation
+  [:ref:`Specification <wrapper_flavor>` | :ref:`Tutorial <tutorial-wrapper>` | :ref:`Example <examples-wrapper>`]
+
+Any flavor can also be *derived* from another burrito — for example, a back-translation derived from a source text translation. See :ref:`derived_flavor`.
+
+You can create your own nonstandard flavors using the ``x-`` prefix; see :ref:`custom_flavors`.

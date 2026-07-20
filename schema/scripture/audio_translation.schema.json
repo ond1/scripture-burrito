@@ -1,6 +1,10 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://burrito.bible/schema/scripture/audio_translation.schema.json",
+    "$$target": [
+        "scripture/audio_translation.schema.json",
+        "#/definitions/format"
+    ],
     "title": "Flavor Details: Audio Translation",
     "type": "object",
     "description": "Schema of flavor field of scripture/audioTranslation flavor",

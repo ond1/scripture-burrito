@@ -7,12 +7,11 @@ Examples
 The following links provide examples of each of the defined :ref:`flavors-index`.
 
 .. toctree::
+   audioAlignment
    audioTranslation
-   embossedBrailleScripture
    minimalTemplate
-   signLanguageVideoTranslation
-   textStories
    textTranslation
    textTranslation_derived
-   typesetScripture
+   wordAlignment
    xScripture
+   wrapper

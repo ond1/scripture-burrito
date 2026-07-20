@@ -1,167 +1,113 @@
 .. _scripture_text_flavor:
 
-##############
-Scripture Text
-##############
+##############################
+Scripture Text Specification
+##############################
 
-======
-Status
-======
+[:ref:`Tutorial <tutorial-textTranslation>`]  [:ref:`Example <examples-textTranslation>`]
 
-The Scripture Text flavor is based on the Digital Bible Library's text entry type, which was in turn based on Paratext's project format. As of August 2019, DBL "text bundles" have been used to represent over 2300 translation projects in over 1500 languages. These bundles are consumed by many publisher-facing tool chains, including YouVersion and Global.Bible.
+This page covers fields specific to the Scripture Text flavor. For fields common to all burritos see :ref:`burrito-structure`.
 
-This flavor is intended for use with any Scripture text, whether they be original language texts or translations.
+A Scripture Text burrito contains a Scripture translation or original-language
+edition in **USFM**, **USX**, or **USJ** format.
 
-The vast majority of text entries in DBL were uploaded by Paratext. Each entry includes
+===========
+Type Fields
+===========
 
-* a "release" section which provides one USX file per book plus a few files in other formats
+``type.flavorType.name``
+    MUST be ``"scripture"``.
 
-* a "source" section, only visible to the entry owner, which contains a dump of the Paratext project in a zip file.
+``type.flavorType.flavor.name``
+    MUST be ``"textTranslation"``.
 
-The Scripture Burrito scriptureText flavor follows this approach, but (conceptually) unpacks the source zip file to make source content easier to catalog and to use.
+``type.flavorType.flavor.projectType``
+    MUST be present. MUST be one of:
 
-=======
-Content
-=======
+    * ``"standard"`` — a normal translation or edition
+    * ``"daughter"`` — derived from a parent translation
+    * ``"studyBible"`` — a full study Bible
+    * ``"studyBibleAdditions"`` — commentary or helps supplementing a study Bible
+    * ``"backTranslation"`` — a reverse translation for checking
+    * ``"auxiliary"`` — supplemental or experimental
+    * ``"transliterationManual"`` — manual transliteration
+    * ``"transliterationWithEncoder"`` — automatically generated transliteration
 
--------------------------
-Derived from DBL "source"
--------------------------
+``type.flavorType.flavor.translationType``
+    MUST be present. MUST be one of:
 
-* One USFM file per Paratext "book" (ie canonical book, but also frontmatter, backmatter, etc)
+    * ``"firstTranslation"`` — first translation into this language
+    * ``"newTranslation"`` — a new translation independent of existing versions
+    * ``"revision"`` — a revision of a prior translation
+    * ``"studyOrHelpMaterial"`` — study notes or supplementary helps
 
-* BookNames.xml (????)
+``type.flavorType.flavor.audience``
+    MUST be present. MUST be one of:
 
-* CheckingStatus.xml (???)
+    * ``"basic"`` — simplified or learner audience
+    * ``"common"`` — general readership
+    * ``"common-literary"`` — general readership with elevated literary style
+    * ``"literary"`` — formal or literary audience
+    * ``"liturgical"`` — designed for public worship
+    * ``"children"`` — adapted for young readers
 
-* CommentTags.xml (???)
+``type.flavorType.flavor.usfmVersion``
+    MUST be present. MUST match the pattern ``\d+\.\d+(\..+)?``
+    (e.g. ``"3.1"``, ``"3.1.0"``). Applies to all three serializations
+    (USFM, USX, USJ).
 
-* ErrorDenials.xml (???)
+``type.flavorType.currentScope``
+    MUST be present. Keys MUST be valid three-letter USFM book codes. Each
+    value is a list of included chapters (integers or ``"ch:v–ch:v"`` ranges);
+    an empty list means all chapters of that book are included.
 
-* hyphenatedWords.txt (???)
+============
+Ingredients
+============
 
-* ProjectProgress.xml (???)
+**Text files**
 
-* ProjectUpdates.xml (???)
+At least one text ingredient MUST be present. Text ingredients MUST use one of
+the following MIME types:
 
-* ProjectUserAccess.xml (???)
+* ``"text/x-usfm"`` for USFM (``.SFM``, ``.USFM``)
+* ``"application/xml"`` for USX
+* ``"application/json"`` for USJ (with ``"role": "text"``)
 
-* Settings.xml (???)
+Text ingredients MUST include a ``scope`` mapping each ingredient to the book
+or books it contains. Every book declared in ``currentScope`` MUST be covered
+by at least one text ingredient.
 
-* SpellingStatus.xml (???)
+**Versification file**
 
-* TermRenderings.xml (???)
+A ``versification.json`` ingredient SHOULD be present. It MUST carry
+``"role": "versification"`` and ``"mimeType": "application/json"``. It MUST
+conform to the Copenhagen Alliance Versification format.
 
-* custom.sty - a stylesheet for rendering SFM according to user preferences
+**Locale data**
 
-* custom.json - the content of Paratext's custom.vrs file, rendered as JSON as for the peripheralVersification flavor
+At least one ``.ldml`` locale file SHOULD be present. It MUST carry
+``"role": "localedata"`` and ``"mimeType": "application/xml"``.
 
-* \*.ldml files (???)
+**Optional ingredients**
 
-* license.json (???)
+The following ingredient roles MAY be present:
 
---------------------------
-Derived from DBL "release"
---------------------------
-
-* One USX file per Paratext "book" (ie canonical book, but also frontmatter, backmatter, etc)
-
-* \*.ldml (???)
-
-* styles.xml - a stylesheet for rendering SFM according to user preferences
-
-* versification.json - the equivalent of DBL's versification.vrs file, which is a consolidated versification scheme for the translation based on the "org" versification scheme.
-
-* optionally, fonts
-
-=======================
-Metadata Flavor Details
-=======================
-
------------
-projectType
------------
-
-This is one of
-
-* standard
-
-* daughter
-
-* studyBible
-
-* studyBibleAdditions
-
-* backTranslation
-
-* auxiliary
-
-* transliterationManual
-
-* transliterationWithEncoder
-
----------------
-translationType
----------------
-
-This is one of
-
-* First
-
-* New
-
-* Revision
-
-* Study / Help Material
-
---------
-audience
---------
-
-This is one of
-
-* Basic
-
-* Common
-
-* Common - Literary
-
-* Literary
-
-* Liturgical
-
-* Children
-
------------
-usfmVersion
------------
-
-The schema version of USFM and/or USX in the burrito (currently expected to be v3.0)
+* ``"styleSheet"`` — Paratext custom style sheet
+* ``"font"`` — font files for rendering
+* ``"license"`` — license or permissions statement
 
 ===========
 Conventions
 ===========
 
--------
-usxDirs
--------
+``usxRefs``
+    If present, signals that USX ingredients include machine-readable
+    cross-reference markup.
 
-With DBL metadata 2.x, Paratext uploads USX organized into one directory per publication, named USX_<n> (where n is, eg, "1" if the publication id is "p1") This structure means that identical USX files may be stored multiple times and, even in DBL metadata 2.x, publication ids are not necessarily numeric.
+``usxDirs``
+    If present, signals that USX ingredients include direction markup.
 
-With DBL metadata 2.x, USX filenames have the form XYZ.usx, where XYZ is an upper case Paratext book code. Only canonical books are included in the USX.
-
-When present, this convention confirms that the historical DBL structure has been respected. When absent, this structure may or may not be partially or fully respected. (The structure is not strictly required because the metadata provides locations and roles of resources explicitly, but some tool chains have relied on the well-known directory structure.)
-
--------
-usxRefs
--------
-
-Paratext provides references within USX in a language-independent, machine-friendly format, via parsing based on many settings within Paratext. This feature has proved extremely useful for producing ePubs, web pages and for other applications where references are treated as hyperlinks.
-
-When present, this convention confirms that machine-readable references has been provided in the USX. When absent, machine-readable references may or may not be present.
-
--------------------------
-typesetAsVersedParagraphs
--------------------------
-
-This convention informs consumers of the burrito, in a production context, that the content should be formatted with each verse or verse range as a separate paragraph, regardless of the position of paragraph breaks in the USX. The absence of this convention implies that consumers should respect the USX paragraph breaks.
+``typesetAsVersedParagraphs``
+    If present, consumers SHOULD render each verse or verse range as a
+    separate paragraph, ignoring paragraph markers in the source file.

@@ -1,1 +1,1 @@
-Burritos exist in a number of **flavors**. Flavors are distinguished by their FlavorType and **reference system**.
+Flavors are distinguished by their flavor type. Each flavor navigates content differently: scripture text and audio burritos use book, chapter, and verse; word alignment burritos use word-level references; audio-text alignment burritos use timecodes.

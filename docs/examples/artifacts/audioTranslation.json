@@ -4,48 +4,28 @@
     "version": "1.0.0",
     "category": "source",
     "generator": {
-      "softwareName": "DBLImport",
-      "softwareVersion": "0.0.0",
-      "userName": "Eric Pyle"
+      "softwareName": "Orature",
+      "softwareVersion": "2.0.0",
+      "userName": "Fatima Maïga"
     },
-    "defaultLocale": "en",
-    "dateCreated": "2018-03-15T19:38:40.762935+00:00",
-    "comments": [
-      "Updated with working audio files for GEN 1-3 and MAT 1-3, test browser open on success"
-    ]
-  },
-  "idAuthorities": {
-    "dbl": {
-      "id": "https://thedigitalbiblelibrary.org",
-      "name": {
-        "en": "The Digital Bible Library"
-      }
-    }
+    "defaultLocale": "dje",
+    "dateCreated": "2025-11-10T14:00:00+01:00"
   },
   "identification": {
-    "primary": {
-      "dbl": {
-        "6e0d81a24efbb679": {
-          "revision": "9",
-          "timestamp": "2018-03-15T19:38:40.762935+00:00"
-        }
-      }
-    },
     "name": {
-      "en": "TEST Audio Bible - Local"
-    },
-    "description": {
-      "en": "TEST Audio Bible - Description"
+      "en": "Zarma NT Audio — Titus",
+      "dje": "Zarma Neeriya Koyra — Tit"
     },
     "abbreviation": {
-      "en": "DBLTD"
+      "en": "ZJNT-audio"
     }
   },
   "languages": [
     {
-      "tag": "en",
+      "tag": "dje",
       "name": {
-        "en": "English"
+        "en": "Zarma",
+        "dje": "Zarmaciine"
       }
     }
   ],
@@ -54,150 +34,83 @@
       "name": "scripture",
       "flavor": {
         "name": "audioTranslation",
-        "performance": ["multipleVoice", "drama", "withMusic"],
+        "performance": ["singleVoice", "reading"],
         "formats": {
-          "format1": {
+          "format-mp3": {
             "compression": "mp3",
-            "trackConfiguration": "2/0 (Stereo)",
+            "trackConfiguration": "1/0 (Mono)",
             "bitRate": 128000,
-            "bitDepth": 16,
             "samplingRate": 44100
           }
         }
       },
       "currentScope": {
-        "GEN": [],
-        "MAT": []
+        "TIT": ["1", "2", "3"]
       }
     }
   },
-  "confidential": true,
+  "confidential": false,
   "agencies": [
     {
-      "id": "dbl::54650cfa5117ad690fb05fb6",
-      "roles": ["rightsHolder"],
-      "url": "http://thedigitalbiblelibrary.org",
+      "id": "https://seedcompany.com",
+      "roles": ["rightsHolder", "content"],
+      "url": "https://seedcompany.com",
       "name": {
-        "en": "Organization for DBL Testing"
+        "en": "Seed Company"
       },
       "abbr": {
-        "en": "TEST"
-      }
-    },
-    {
-      "id": "dbl::54650ce75117ad68c4c49e91",
-      "roles": ["content", "publication", "management", "finance", "qa"],
-      "name": {
-        "en": "Test Creator"
-      }
-    },
-    {
-      "id": "dbl::54650ce85117ad68c4c49e99",
-      "roles": ["content", "publication", "management", "finance", "qa"],
-      "name": {
-        "en": "Test Publisher"
+        "en": "SC"
       }
     }
   ],
-  "targetAreas": [
-    {
-      "code": "US",
-      "name": {
-        "en": "United States"
-      }
-    }
-  ],
-  "localizedNames": {
-    "book-gen": {
-      "abbr": {
-        "en": "Gn"
-      },
-      "short": {
-        "en": "Genesis"
-      },
-      "long": {
-        "en": "Genesis"
-      }
-    },
-    "book-mat": {
-      "abbr": {
-        "en": "Mt"
-      },
-      "short": {
-        "en": "Matthew"
-      },
-      "long": {
-        "en": "The Gospel according to Matthew"
-      }
-    }
-  },
   "ingredients": {
-    "release/audio/GEN/GEN_001.mp3": {
-      "checksum": {
-        "md5": "b5fd441feb7eed02c68dca3d8dbbfe80"
-      },
+    "media/dje_tit_c01.mp3": {
+      "checksum": {"md5": "f9bcf3872446a7d50e66c24d5692f7c7"},
       "mimeType": "audio/mpeg",
-      "size": 10168353,
-      "scope": {
-        "GEN": ["1"]
-      }
+      "size": 1165070,
+      "scope": {"TIT": ["1"]}
     },
-    "release/audio/GEN/GEN_002.mp3": {
-      "checksum": {
-        "md5": "d8737c9c4339b95ab0c876a6867415af"
-      },
-      "mimeType": "audio/mpeg",
-      "size": 7977633,
-      "scope": {
-        "GEN": ["2"]
-      }
+    "media/dje_tit_c01.json": {
+      "checksum": {"md5": "bc6e1fa1109126fb6b14e4f41bbde378"},
+      "mimeType": "application/json",
+      "size": 1596,
+      "scope": {"TIT": ["1"]},
+      "role": "timing"
     },
-    "release/audio/GEN/GEN_003.mp3": {
-      "checksum": {
-        "md5": "e5d4e332ac7070a66915ce2f898f85f6"
-      },
+    "media/dje_tit_c02.mp3": {
+      "checksum": {"md5": "9ee007594822f19e8e1ce6ab5d788004"},
       "mimeType": "audio/mpeg",
-      "size": 9992673,
-      "scope": {
-        "GEN": ["3"]
-      }
+      "size": 933938,
+      "scope": {"TIT": ["2"]}
     },
-    "release/audio/MAT/MAT_001.mp3": {
-      "checksum": {
-        "md5": "48e2d311b4de8a61b1f311ddb2be970f"
-      },
-      "mimeType": "audio/mpeg",
-      "size": 8399073,
-      "scope": {
-        "MAT": ["1"]
-      }
+    "media/dje_tit_c02.json": {
+      "checksum": {"md5": "eb5f27a17956220b848d19f0b9b6720b"},
+      "mimeType": "application/json",
+      "size": 1445,
+      "scope": {"TIT": ["2"]},
+      "role": "timing"
     },
-    "release/audio/MAT/MAT_002.mp3": {
-      "checksum": {
-        "md5": "f5fad0278058706de82fdcc800da83ff"
-      },
+    "media/dje_tit_c03.mp3": {
+      "checksum": {"md5": "a7a8ce6c238dc260c349e12d89efbdaf"},
       "mimeType": "audio/mpeg",
-      "size": 10095393,
-      "scope": {
-        "MAT": ["2"]
-      }
+      "size": 1038010,
+      "scope": {"TIT": ["3"]}
     },
-    "release/audio/MAT/MAT_003.mp3": {
-      "checksum": {
-        "md5": "8019d42da92d9ad42be0e0c75ef4fddb"
-      },
-      "mimeType": "audio/mpeg",
-      "size": 6794913,
-      "scope": {
-        "MAT": ["3"]
-      }
+    "media/dje_tit_c03.json": {
+      "checksum": {"md5": "3450197390f0351547be11047ba68b5e"},
+      "mimeType": "application/json",
+      "size": 1445,
+      "scope": {"TIT": ["3"]},
+      "role": "timing"
     }
   },
   "copyright": {
-    "shortStatements": [{
-        "statement": "<p>Test Copyright. All rights reserved.</p>",
-        "mimetype": "text/html",
+    "shortStatements": [
+      {
+        "statement": "CC BY-SA 4.0",
+        "mimetype": "text/plain",
         "lang": "en"
-    }]
+      }
+    ]
   }
 }

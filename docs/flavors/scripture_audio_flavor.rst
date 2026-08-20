@@ -9,7 +9,7 @@ Scripture Audio Specification
 Audio Translation Flavor
 ========================
 
-2 Audio Translation Flavor (main section)
+2 Audio Translation Flavor 
 =========================================
 
 2.1 Overview
@@ -496,7 +496,7 @@ of the translation project.
 
 Timing records identify the associated Scripture content using markers
 defined by the Scripture Alignment Specification. Marker syntax follows
-the **USFM Scripture Referencing** standard (U23003), providing a
+the **USFM Scripture Referencing** standard (usfm-scripture-reference), providing a
 consistent representation of books, chapters, verses, and verse ranges.
 
 For example:
@@ -533,6 +533,14 @@ representing timing information.
 ---------------------------
 
 TODO
+
+2.8 Additional Examples
+---------------------------
+Additional examples demonstrating the use of the Audio Translation specification 
+are available in the https://github.com/bible-technology/sb_audioTranslation GitHub repository. 
+These examples provide practical reference implementations and sample Scripture Burrito 
+audio translation packages.
+
 
 2.8 References
 ==============

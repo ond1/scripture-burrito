@@ -545,7 +545,7 @@ SB-ALIGN: *Scripture Burrito Alignment Specification*. Available at:
 https://github.com/bible-technology/alignment-spec/blob/main/spec.md
 
 *u23003 USFM Referencing Specification*.
-https://github.com/bible-technology/interop-audioTranslation
+https://github.com/usfm-bible/tcdocs/blob/5bd73b86030f256268e6043fca84bfdbb54c0081/proposals/2023/u23003_biblical_references.md
 
 Changes Log
 ===========

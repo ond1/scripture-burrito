@@ -23,8 +23,8 @@ project together with information such as identification, languages,
 copyright, ingredients, and flavor-specific information.
 
 An Audio Translation Scripture Burrito describes the audio recordings
-themselves and the files required to exchange an audio project. Timing
-information is stored separately using the Alignment specification,
+themselves and the files required to exchange an audio project. Timing 
+information is stored in separate ingredients,
 which records the correspondence between Scripture references and
 positions within one or more audio recordings. This separation allows
 timing data to be maintained independently of the audio recordings that
@@ -91,7 +91,7 @@ this flavour.
        "flavorType": {
          "name": "scripture",
          "flavor": {
-           "name": "audioTranslation"
+           "name": ""
          },
          "currentScope": {
            "LUK": [
@@ -295,7 +295,7 @@ shows what is contained in this flavor:
      "flavorType": {
        "name": "scripture",
        "flavor": {
-         "name": "audioTranslation"
+         "name": ""
        },
        "currentScope": {
          "LUK": [

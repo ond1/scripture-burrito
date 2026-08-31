@@ -1,278 +1,630 @@
-Scripture Burrito Wrapper Specification
-=====================================
-
-1. Introduction
-----------------
-
-A Scripture Burrito Wrapper provides a way to group multiple related
-Scripture Burritos into a single project or distribution. Each contained
-burrito remains an independent, self-contained Scripture Burrito with its
-own metadata and flavour.
-
-A wrapper does not define or alter the flavour of the contained burritos.
-Instead, it identifies the burritos that belong together and describes
-their relationship to the overall project.
-
-A wrapper can contain different Scripture Burrito flavours, allowing
-related resources such as audio translations, text translations, project
-management data, intellectual property information, and other supported
-flavours to be distributed together.
-
-The wrapper is represented by a ``wrapper.json`` file located at the root
-of the wrapper package.
-
-
-2. Wrapper Structure
---------------------
-
-A wrapper MUST contain the following top-level properties:
-
-* ``format``
-* ``meta``
-* ``contents``
-
-The ``format`` property MUST have the value::
-
-    "format": "scripture burrito wrapper"
-
-The ``meta`` property contains metadata describing the wrapper itself.
-
-The ``contents`` property identifies the Scripture Burritos contained
-within the wrapper.
-
-
-2.1 Meta
-~~~~~~~~
-
-The ``meta`` object describes the wrapper and MUST contain:
-
-* ``name``
-* ``version``
-* ``generator``
-* ``dateCreated``
-
-It MAY also contain:
-
-* ``description``
-* ``abbreviation``
-* ``defaultLocale``
-
-The metadata applies to the *wrapper*, rather than to the individual
-burritos contained within it. Each contained burrito MUST provide its own
-``metadata.json``.
-
-
-2.2 Contents
-~~~~~~~~~~~~
-
-The ``contents`` object MUST contain a ``burritos`` array.
-
-Each entry identifies one Scripture Burrito contained within the wrapper.
-
-For example::
-
-    "contents": {
-      "burritos": [
-        {
-          "id": "ENGSEB2-audio",
-          "path": "audio",
-          "role": "source"
-        },
-        {
-          "id": "ENGSEB2-text",
-          "path": "text",
-          "role": "derived"
-        }
-      ]
-    }
-
-The ``burritos`` array MUST contain at least one entry. Each entry MUST
-contain:
-
-* ``id``
-* ``path``
-* ``role``
-
-The ``path`` is relative to the directory containing ``wrapper.json``.
-
-
-2.3 Contained Burritos
-~~~~~~~~~~~~~~~~~~~~~~
-
-Each entry in ``contents.burritos`` MUST identify a valid Scripture
-Burrito or another valid Scripture Burrito Wrapper.
-
-The ``path`` is relative to the directory containing ``wrapper.json`` and
-MUST identify the directory containing the burrito's ``metadata.json`` or,
-in the case of a nested wrapper, its ``wrapper.json``.
-
-Nested wrappers are permitted, but circular references MUST NOT occur.
-
-The flavour of a contained burrito is determined by its own
-``metadata.json``. The wrapper MUST NOT duplicate or override the flavour
-information.
-
-This allows a wrapper to contain burritos of different flavours.
-
-For example::
-
-    project/
-    ├── wrapper.json
-    ├── audio/
-    │   └── metadata.json
-    ├── text/
-    │   └── metadata.json
-    ├── apmdata/
-    │   └── metadata.json
-    └── intellectualproperty/
-        └── metadata.json
-
-
-2.4 Burrito Roles
-~~~~~~~~~~~~~~~~~
-
-The ``role`` property describes the relationship of a contained burrito
-to the other burritos in the wrapper.
-
-The standard roles are:
-
-+----------------+--------------------------------------------------------------+
-| Role           | Description                                                  |
-+================+==============================================================+
-| ``source``     | Primary, editable content                                    |
-+----------------+--------------------------------------------------------------+
-| ``derived``    | Content produced from another burrito                         |
-+----------------+--------------------------------------------------------------+
-| ``supplemental`` | Supporting material that is not itself the primary         |
-|                | Scripture deliverable                                         |
-+----------------+--------------------------------------------------------------+
-
-Custom roles MAY be used where supported by the Scripture Burrito
-specification. Custom roles SHOULD begin with ``x-``.
-
-The role is a property of the relationship within the wrapper and does
-not determine the flavour of the contained burrito.
-
-
-2.5 Supporting Multiple Flavours
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A wrapper MAY contain any combination of supported Scripture Burrito
-flavours.
-
-For example, an audio Scripture project could contain:
-
-* ``audioTranslation``
-* ``textTranslation``
-* ``intellectualProperty``
-* ``apmData``
-
-The wrapper therefore provides a mechanism for grouping related Scripture
-Burritos without requiring the individual flavours to be merged into a
-single burrito.
-
-The flavour of each contained burrito is determined by its own
-``metadata.json``.
-
-For example::
-
-    {
-      "id": "SEHSAM-audio",
-      "path": "audio",
-      "role": "source"
-    }
-
-The flavour of this burrito is determined by::
-
-    audio/metadata.json
-
-Similarly::
-
-    {
-      "id": "SEHSAM-text",
-      "path": "text",
-      "role": "derived"
-    }
-
-gets its flavour from::
-
-    text/metadata.json
-
-This separation allows each flavour to evolve independently while still
-allowing related resources to be distributed together.
-
-
-2.6 Example
-~~~~~~~~~~~
-
-The following example demonstrates a wrapper containing audio, text,
-APM data, and intellectual property burritos::
-
-    {
-      "meta": {
-        "name": {
-          "en": "Sample Burrito Burrito Wrapper"
-        },
-        "version": "0.0.1",
-        "generator": {
-          "name": "Audio Project Manager Train",
-          "version": "4.6.0.alpha.0"
-        },
-        "dateCreated": "2026-08-13",
-        "description": {
-          "en": "A new burrito wrapper for Sample Burrito"
-        },
-        "abbreviation": {
-          "en": "SEHSAM"
-        },
-        "defaultLocale": "en"
-      },
-      "format": "scripture burrito wrapper",
-      "contents": {
-        "burritos": [
-          {
-            "id": "SEHSAM-aPMData",
-            "path": "apmdata",
-            "role": "supplemental"
+.. _scripture_audio_flavor:
+
+################################
+Scripture Audio Specification
+################################
+
+[:ref:`Tutorial <tutorial-audioTranslation>`]
+[:ref:`Example <examples-audioTranslation>`]
+
+
+Audio Translation Flavor
+==========================
+
+Overview
+------------
+
+The Audio Translation flavor is one of the Scripture Burrito flavors
+used to describe and exchange Scripture audio projects. Like all
+Scripture Burrito flavors, it follows the common structure defined by
+the core specification. This structure provides metadata describing the
+project together with information such as identification, languages,
+copyright, ingredients, and flavor-specific information.
+
+An Audio Translation Scripture Burrito describes the audio recordings
+themselves and the files required to exchange an audio project. Timing
+information is stored in separate ingredients, which record the
+correspondence between Scripture references and positions within one or
+more audio recordings. This separation allows timing data to be
+maintained independently of the audio recordings that it describes.
+
+It is also possible to combine multiple related Audio Translation
+Scripture Burritos along with other Scripture Burrito flavors as a group
+using a Scripture Burrito Wrapper. For example, a wrapper may combine a
+Text Translation Scripture Burrito, an Audio Translation Scripture
+Burrito, and one or more Alignment Scripture Burritos into a single
+project. Wrappers are described in the :ref:`Wrapper Specification <wrapper_flavor>`.
+
+The following example shows a complete Scripture Burrito for the 
+Audio Translation flavor and is used to illustrate the various parts of this specification.
+
+.. example:: Full Audio Translation flavor
+
+   .. code-block:: json
+
+      {
+        "format": "scripture burrito",
+        "meta": {
+          "version": "1.0.0",
+          "category": "source",
+          "generator": {
+            "softwareName": "Audio Project Manager",
+            "softwareVersion": "4.5.0",
+            "userName": "Joe Bloggs"
           },
-          {
-            "id": "SEHSAM-text",
-            "path": "text",
-            "role": "derived"
+          "defaultLocale": "en",
+          "dateCreated": "2026-05-21T17:46:07.857Z",
+          "comments": [
+            "Generated by Audio Project Manager from # Burrito"
+          ]
+        },
+        "idAuthorities": {
+          "apm": {
+            "id": "https://www.audioprojectmanager.org",
+            "name": {
+              "en": "Audio Project Manager"
+            }
+          }
+        },
+        "identification": {
+          "primary": {
+            "apm": {
+              "3800": {
+                "revision": "1",
+                "timestamp": "2026-05-21T17:46:07.857Z"
+              }
+            }
           },
-          {
-            "id": "SEHSAM-audio",
-            "path": "audio",
-            "role": "source"
+          "name": {
+            "en": "Sample Burrito"
           },
+          "description": {
+            "en": "Just a sample burrito"
+          },
+          "abbreviation": {
+            "en": "SEHSAM"
+          }
+        },
+        "type": {
+          "flavorType": {
+            "name": "scripture",
+            "flavor": {
+              "name": "audioTranslation"
+            },
+            "currentScope": {
+              "LUK": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          }
+        },
+        "confidential": true,
+        "agencies": [
           {
-            "id": "SEHSAM-intellectualProperty",
-            "path": "intellectualproperty",
-            "role": "supplemental"
+            "id": "apm::3800",
+            "roles": [
+              "rightsHolder"
+            ],
+            "name": {
+              "en": "Burrito"
+            }
+          }
+        ],
+        "targetAreas": [
+          {
+            "code": "US",
+            "name": {
+              "en": "United States"
+            }
+          }
+        ],
+        "localizedNames": {
+          "book-luk": {
+            "abbr": {
+              "en": "Lk"
+            },
+            "short": {
+              "en": "Luke"
+            },
+            "long": {
+              "en": "Luke"
+            }
+          }
+        },
+        "ingredients": {
+          "42LUK/001/SEHSAM-LUK-1_1-4v2.mp3": {
+            "checksum": {
+              "md5": "d32e9efa2f1af2064e513c807d606421"
+            },
+            "mimeType": "audio/mpeg",
+            "size": 277053,
+            "scope": {
+              "LUK": [
+                "1:1-4"
+              ]
+            },
+            "properties": {
+              "x-apmId": "41555"
+            }
+          }
+        },
+        "copyright": {
+          "shortStatements": [
+            {
+              "statement": "<p>© 2025, SIL Global</p>",
+              "mimetype": "text/html",
+              "lang": "en"
+            }
+          ]
+        },
+        "languages": [
+          {
+            "tag": "seh",
+            "name": {
+              "en": "Sena"
+            }
           }
         ]
       }
-    }
 
+Meta
+--------
 
-2.7 Wrapper Flavour Independence
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The Audio Translation specification contains the ``meta`` object, which
+is common to all flavors of a Scripture Burrito. In summary, it contains
+a collection of required and optional properties. It is recommended that 
+the meta object of the Audio Translation flavor contain the following 
+information: the version of the Scripture Burrito specification, the 
+software used to generate the Scripture Burrito, the date of creation, 
+and the default locale used for localized metadata.
+See: `meta object
+<https://docs.burrito.bible/en/develop/introduction/structure.html#meta>`__.
 
-A wrapper MUST NOT make assumptions about the flavour of a contained
-burrito. The flavour MUST be determined from the metadata of the
-contained burrito.
+An example of the ``meta`` object for an Audio Translation flavor is
+shown below:
 
-A wrapper MAY contain multiple burritos of the same flavour or burritos
-of different flavours.
+.. example:: Meta
 
-This allows the wrapper to group related resources while keeping each
-Scripture Burrito flavour independently defined and validated.
+   .. code-block:: json
 
+      {
+        "meta": {
+          "version": "1.0.0",
+          "category": "source",
+          "generator": {
+            "softwareName": "Audio Project Manager",
+            "softwareVersion": "4.5.0",
+            "userName": "Joe Bloggs"
+          },
+          "defaultLocale": "en",
+          "dateCreated": "2026-05-21T17:46:07.857Z",
+          "comments": [
+            "Generated by Audio Project Manager from # Burrito"
+          ]
+        }
+      }
 
-2.8 Additional Examples
-~~~~~~~~~~~~~~~~~~~~~~~
+A second, simpler example is shown below. In this example, the optional
+``userName`` and ``comments`` properties are omitted.
 
-Additional examples and sample Scripture Burrito audio translation
-packages can be found in the ``sb_audioTranslation`` GitHub repository::
+.. example:: Meta without optional properties
 
-    https://github.com/bible-technology/sb_audioTranslation
+   .. code-block:: json
+
+      {
+        "meta": {
+          "category": "source",
+          "dateCreated": "2026-02-24",
+          "version": "1.0.0",
+          "generator": {
+            "softwareName": "Orature",
+            "softwareVersion": ""
+          },
+          "defaultLocale": "en"
+        }
+      }
+
+Authorities
+---------------
+
+The `idAuthorities
+<https://docs.burrito.bible/en/develop/introduction/structure.html#id-authorities>`__
+object identifies the authorities responsible for assigning identifiers
+used within the Audio Translation flavor. The ``idAuthorities`` object
+is common to all flavors of Scripture Burrito.
+
+.. example:: Authorities
+
+   .. code-block:: json
+
+      {
+        "idAuthorities": {
+          "wacs": {
+            "id": "https://content.bibletranslationtools.org/",
+            "name": {
+              "en": "Wycliffe Associates Content Service"
+            }
+          }
+        }
+      }
+
+Identification
+------------------
+
+The `identification
+<https://docs.burrito.bible/en/develop/introduction/structure.html#identification>`__
+object is also common to all flavors of a Scripture Burrito and is
+therefore required for an Audio Translation flavor. This object provides
+identification information for the project.
+
+.. example:: Identification
+
+   .. code-block:: json
+
+      {
+        "identification": {
+          "name": {
+            "en": "Unlocked Literal Bible (Audio)"
+          },
+          "abbreviation": {
+            "en": "ulb"
+          },
+          "primary": {
+            "id": {}
+          }
+        }
+      }
+
+Confidential
+----------------
+
+The ``confidential`` property MUST be set to ``true`` if the project
+must not be publicly disclosed and the identities of project members
+must be kept confidential. It MUST be set to ``false`` otherwise.
+
+.. example:: Confidential
+
+   .. code-block:: json
+
+      {
+        "confidential": false
+      }
+
+Type
+--------
+
+Every Audio Translation Scripture Burrito MUST contain a ``type`` object
+describing its flavor. Although the ``type`` object is common to all
+Scripture Burrito flavors, it is worth describing the properties
+specific to the Audio Translation flavor here.
+
+.. example:: Type
+
+   .. code-block:: json
+
+      {
+        "type": {
+          "flavorType": {
+            "name": "scripture",
+            "flavor": {
+              "name": "audioTranslation"
+            },
+            "currentScope": {
+              "LUK": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          }
+        }
+      }
+
+``flavorType.name`` Property
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``flavorType.name`` property MUST have the value ``scripture``. The
+``flavor.name`` property MUST have the value ``audioTranslation``, which
+indicates that this is an Audio Translation flavor.
+
+The ``currentScope`` property identifies the Scripture books, chapters,
+or verses represented by the Audio Translation Scripture Burrito. This
+property MUST be present. Keys MUST be valid USFM book codes. Values are
+arrays of chapter numbers as strings (e.g. ``["1", "2", "3"]``); or as chapter:verse as strings 
+(e.g. ``["1:1-21", "2:1-5"]``); an empty array means all chapters are present.
+
+The following example illustrates the ``type`` object:
+
+.. example:: Type with current scope
+
+   .. code-block:: json
+
+      {
+        "type": {
+          "flavorType": {
+            "name": "scripture",
+            "flavor": {
+              "name": "audioTranslation"
+            },
+            "currentScope": {
+              "TIT": [
+                "1",
+                "2",
+                "3"
+              ]
+            }
+          }
+        }
+      }
+
+Languages
+-------------
+
+The `languages
+<https://docs.burrito.bible/en/develop/introduction/structure.html#languages>`__
+property MUST conform to the language object defined in the Scripture
+Burrito specification. It identifies each language represented in the
+Audio Translation Scripture Burrito.
+
+.. example:: Languages
+
+   .. code-block:: json
+
+      {
+        "languages": [
+          {
+            "tag": "seh",
+            "name": {
+              "en": "Sena"
+            }
+          }
+        ]
+      }
+
+Copyright
+-------------
+
+The ``copyright`` object MUST conform to the requirements defined by the
+core Scripture Burrito specification. It provides information about the
+copyright status, copyright notices, and licensing of the Audio
+Translation and its associated content.
+
+For an Audio Translation, the copyright information SHOULD clearly
+identify the rights holder and the license under which the audio
+recordings may be distributed and used. Where different audio
+ingredients are subject to different copyright or licensing terms, the
+applicable license information MAY be provided using the mechanisms
+defined by the core Scripture Burrito specification.
+
+At least one of ``publicDomain``, ``shortStatements``, or ``licenses``
+MUST be present.
+
+The following example shows copyright information for an Audio
+Translation distributed under a Creative Commons license:
+
+.. example:: Copyright
+
+   .. code-block:: json
+
+      {
+        "copyright": {
+          "shortStatements": [
+            {
+              "statement": "<p>The Spoken English Bible® (SEB®) is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. 
+              To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, 
+              Mountain View, CA 94042, USA.</p>",
+              "mimetype": "text/html",
+              "lang": "en"
+            }
+          ]
+        }
+      }
+      
+
+Ingredients
+---------------
+
+The ``ingredients`` object MUST conform to the definition in the core
+Scripture Burrito specification. It describes the files that make up an
+Audio Translation Scripture Burrito, with each ingredient representing a
+single file and its associated metadata, such as its location, MIME type,
+checksum, size, and Scripture scope.
+
+.. example:: Ingredients
+
+   .. code-block:: json
+
+      {
+        "ingredients": {
+          "42LUK/001/SEHSAM-LUK-1_1-4v2.mp3": {
+            "checksum": {
+              "md5": "d32e9efa2f1af2064e513c807d606421"
+            },
+            "mimeType": "audio/mpeg",
+            "size": 277053,
+            "scope": {
+              "LUK": [
+                "1:1-4"
+              ]
+            },
+            "properties": {
+              "x-apmId": "41555"
+            }
+          }
+        }
+      }
+
+The Audio Translation flavor extends the standard ingredient definition
+by associating audio-specific metadata with individual ingredients
+rather than with the flavor itself. This replaces the approach used in
+earlier versions of the Audio Translation flavor, where audio metadata
+was stored at the flavor level.
+
+Associating metadata with individual ingredients allows a single
+Scripture Burrito to contain audio files with different formats,
+encodings, and recording characteristics. For example, a Burrito may
+contain a mixture of MP3 and WAV files, or audio files encoded with
+different bit rates, sample rates, channel configurations, or
+compression settings.
+
+Many technical characteristics of an audio file, such as its codec,
+duration, bit rate, sample rate, bit depth, and channel configuration,
+can be determined directly from the file itself. The Audio Translation
+flavor therefore defines only extension properties that are useful for
+interchange or for information that cannot be reliably derived from the
+audio file.
+
+Properties
+~~~~~~~~~~~~~~~~
+
+Most audio files contain internal encoding information that can be
+detected automatically by audio players and media processing software.
+Consequently, the Scripture Burrito specification does not standardize
+audio encoding metadata.
+
+Where useful, Scripture Burrito creators MAY include additional
+audio-specific metadata in an ingredient's ``properties`` object using
+the standard Scripture Burrito extension mechanism. Extension property
+names MUST begin with the prefix ``x-``.
+
+Common audio-specific extension properties include:
+
++------------------------+-----------------------+-----------------------+
+| Property               | Description           | Example               |
++========================+=======================+=======================+
+| ``x-compression``      | The audio compression | ``MP3``, ``WAV``,     |
+|                        | or container format.  | ``FLAC``              |
++------------------------+-----------------------+-----------------------+
+| ``x-bitRate``          | The encoded audio bit | ``128000``            |
+|                        | rate.                 |                       |
++------------------------+-----------------------+-----------------------+
+| ``x-bitDepth``         | The audio sample bit  | ``16``                |
+|                        | depth.                |                       |
++------------------------+-----------------------+-----------------------+
+| ``x-samplingRate``     | The audio sampling    | ``44100``             |
+|                        | frequency, in hertz.  |                       |
++------------------------+-----------------------+-----------------------+
+| ``x-trackConfiguration`` | The audio channel   | ``mono``, ``stereo``  |
+|                        | configuration.        |                       |
++------------------------+-----------------------+
+
+Applications MAY define additional extension properties where
+appropriate without requiring changes to the core Scripture Burrito
+specification.
+
+Ingredient Roles
+~~~~~~~~~~~~~~~~~~~~~~
+
+Ingredients MAY define one or more roles using the ``x-roles`` extension
+property. Roles identify the purpose of an ingredient independently of
+its MIME type.
+
+One reserved role is ``timing``, which identifies an ingredient
+containing timing information for one or more audio files. An ingredient
+with the ``timing`` role MUST use the Scripture Alignment timing format
+together with the ``vtt-timecode`` extension, as described in
+:ref:`Timing Files <timing-files>`.
+
+Timing Files
+~~~~~~~~~~~~~~~~~~
+
+The ``timing`` ingredient role uses the Scripture Alignment timing
+format together with the ``vtt-timecode`` extension to associate
+portions of an audio recording with Scripture references.
+
+The format of timing files, including the representation of timestamps,
+markers, and alignment records, is defined by the **Scripture Alignment
+Specification**.
+
+The current specification is available here:
+`SB-ALIGN <https://github.com/bible-technology/alignment-spec/blob/main/spec.md>`__.
+
+Audio Translation Scripture Burritos include timing files as
+ingredients to enable applications to synchronize Scripture text with
+audio recordings. These timing files may represent verses, verse
+ranges, chapters, or other logical sections of Scripture, depending on
+the needs of the translation project.
+
+Markers
+~~~~~~~~~~~~~
+
+Timing records identify the associated Scripture content using markers
+defined by the Scripture Alignment Specification. Marker syntax follows
+the **USFM Scripture Referencing** standard
+(`usfm-scripture-reference`), providing a consistent representation of
+books, chapters, verses, and verse ranges.
+
+For example:
+
+.. example:: Scripture marker
+
+   .. code-block:: text
+
+      LUK 1:1-4
+
+A marker identifies the Scripture content represented by a timing
+record, while the associated timestamps identify where that content
+occurs within the audio recording.
+
+Applications consuming Audio Translation Scripture Burritos should
+interpret markers and timing information according to the Scripture
+Alignment Specification.
+
+Other Specifications
+=========================
+
+Alignment Specification
+------------------------------
+
+The Audio Translation flavor uses the Scripture Burrito Alignment
+Specification to represent timing information associated with audio
+recordings. Ingredients with the ``timing`` role MUST conform to the
+Alignment Specification and use the ``vtt-timecode`` extension defined
+by that specification.
+
+The Alignment Specification defines the structure of timing files, the
+representation of timestamps, and the association of Scripture
+references with timed sections. Rather than redefining these concepts,
+the Audio Translation flavor adopts the Alignment Specification for
+representing timing information.
+
+Wrapper Specification
+---------------------------
+
+TODO
+
+Additional Examples
+------------------------
+
+Additional examples demonstrating the use of the Audio Translation
+specification are available in the
+`SB Audio Translation GitHub repository
+<https://github.com/bible-technology/sb_audioTranslation>`__.
+
+These examples provide practical reference implementations and sample
+Scripture Burrito audio translation packages.
+
+References
+===============
+
+*WebVTT: The Web Video Text Tracks Format*. W3C Recommendation.
+
+`https://www.w3.org/TR/webvtt1/ <https://www.w3.org/TR/webvtt1/>`__
+
+SB-ALIGN: *Scripture Burrito Alignment Specification*. Available at:
+
+`https://github.com/bible-technology/alignment-spec/blob/main/spec.md
+<https://github.com/bible-technology/alignment-spec/blob/main/spec.md>`__
+
+*USFM Referencing Specification*.
+
+`https://github.com/usfm-bible/tcdocs/blob/5bd73b86030f256268e6043fca84bfdbb54c0087/proposals/2023/u23003_biblical_references.md
+<https://github.com/usfm-bible/tcdocs/blob/5bd73b86030f256268e6043fca84bfdbb54c0087/proposals/2023/u23003_biblical_references.md>`__
+
+Changes Log
+===========
+
+`Scripture Burrito issue #317
+<https://github.com/bible-technology/scripture-burrito/issues/317>`__

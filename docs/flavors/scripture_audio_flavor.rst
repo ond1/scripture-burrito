@@ -575,6 +575,10 @@ Alignment Specification.
 Other Specifications
 =========================
 
+There are other specifications related to the Audio Specification, 
+which are mentioned here.
+
+
 Alignment Specification
 ------------------------------
 
@@ -593,7 +597,12 @@ representing timing information.
 Wrapper Specification
 ---------------------------
 
-TODO
+The Scripture Burrito Wrapper can contain one or more Audio Translation
+flavor Scripture Burritos, together with Scripture Burritos of other flavors,
+within a single project or distribution.
+
+This allows related content, such as audio, text, and supporting materials,
+to be grouped together and distributed as a single project.
 
 Additional Examples
 ------------------------

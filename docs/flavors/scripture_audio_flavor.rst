@@ -8,10 +8,10 @@ Scripture Audio Specification
 [:ref:`Example <examples-audioTranslation>`]
 
 
-2 Audio Translation Flavor
+Audio Translation Flavor
 ==========================
 
-2.1 Overview
+Overview
 ------------
 
 The Audio Translation flavor is one of the Scripture Burrito flavors
@@ -169,7 +169,7 @@ Audio Translation flavor and is used to illustrate the various parts of this spe
         ]
       }
 
-2.2 Meta
+Meta
 --------
 
 The Audio Translation specification contains the ``meta`` object, which
@@ -226,7 +226,7 @@ A second, simpler example is shown below. In this example, the optional
         }
       }
 
-2.3 Authorities
+Authorities
 ---------------
 
 The `idAuthorities
@@ -250,7 +250,7 @@ is common to all flavors of Scripture Burrito.
         }
       }
 
-2.4 Identification
+Identification
 ------------------
 
 The `identification
@@ -277,7 +277,7 @@ identification information for the project.
         }
       }
 
-2.5 Confidential
+Confidential
 ----------------
 
 The ``confidential`` property MUST be set to ``true`` if the project
@@ -292,7 +292,7 @@ must be kept confidential. It MUST be set to ``false`` otherwise.
         "confidential": false
       }
 
-2.6 Type
+Type
 --------
 
 Every Audio Translation Scripture Burrito MUST contain a ``type`` object
@@ -332,8 +332,8 @@ indicates that this is an Audio Translation flavor.
 The ``currentScope`` property identifies the Scripture books, chapters,
 or verses represented by the Audio Translation Scripture Burrito. This
 property MUST be present. Keys MUST be valid USFM book codes. Values are
-arrays of chapter numbers as strings (e.g. ``["1", "2", "3"]``); an empty
-array means all chapters are present.
+arrays of chapter numbers as strings (e.g. ``["1", "2", "3"]``); or as chapter:verse as strings 
+(e.g. ``["1:1-21", "2:1-5"]``); an empty array means all chapters are present.
 
 The following example illustrates the ``type`` object:
 
@@ -359,7 +359,7 @@ The following example illustrates the ``type`` object:
         }
       }
 
-2.7 Languages
+Languages
 -------------
 
 The `languages
@@ -383,10 +383,47 @@ Audio Translation Scripture Burrito.
         ]
       }
 
-2.8 Copyright
+Copyright
 -------------
 
-2.9 Ingredients
+The ``copyright`` object MUST conform to the requirements defined by the
+core Scripture Burrito specification. It provides information about the
+copyright status, copyright notices, and licensing of the Audio
+Translation and its associated content.
+
+For an Audio Translation, the copyright information SHOULD clearly
+identify the rights holder and the license under which the audio
+recordings may be distributed and used. Where different audio
+ingredients are subject to different copyright or licensing terms, the
+applicable license information MAY be provided using the mechanisms
+defined by the core Scripture Burrito specification.
+
+At least one of ``publicDomain``, ``shortStatements``, or ``licenses``
+MUST be present.
+
+The following example shows copyright information for an Audio
+Translation distributed under a Creative Commons license:
+
+.. example:: Copyright
+
+   .. code-block:: json
+
+      {
+        "copyright": {
+          "shortStatements": [
+            {
+              "statement": "<p>The Spoken English Bible® (SEB®) is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. 
+              To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, 
+              Mountain View, CA 94042, USA.</p>",
+              "mimetype": "text/html",
+              "lang": "en"
+            }
+          ]
+        }
+      }
+      
+
+Ingredients
 ---------------
 
 The ``ingredients`` object MUST conform to the definition in the core
@@ -439,7 +476,7 @@ flavor therefore defines only extension properties that are useful for
 interchange or for information that cannot be reliably derived from the
 audio file.
 
-2.9.1 Properties
+Properties
 ~~~~~~~~~~~~~~~~
 
 Most audio files contain internal encoding information that can be
@@ -477,7 +514,7 @@ Applications MAY define additional extension properties where
 appropriate without requiring changes to the core Scripture Burrito
 specification.
 
-2.9.2 Ingredient Roles
+Ingredient Roles
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Ingredients MAY define one or more roles using the ``x-roles`` extension
@@ -490,7 +527,7 @@ with the ``timing`` role MUST use the Scripture Alignment timing format
 together with the ``vtt-timecode`` extension, as described in
 :ref:`Timing Files <timing-files>`.
 
-2.9.3 Timing Files
+Timing Files
 ~~~~~~~~~~~~~~~~~~
 
 The ``timing`` ingredient role uses the Scripture Alignment timing
@@ -510,7 +547,7 @@ audio recordings. These timing files may represent verses, verse
 ranges, chapters, or other logical sections of Scripture, depending on
 the needs of the translation project.
 
-2.9.4 Markers
+Markers
 ~~~~~~~~~~~~~
 
 Timing records identify the associated Scripture content using markers
@@ -535,10 +572,10 @@ Applications consuming Audio Translation Scripture Burritos should
 interpret markers and timing information according to the Scripture
 Alignment Specification.
 
-2.10 Other Specifications
+Other Specifications
 =========================
 
-2.10.1 Alignment Specification
+Alignment Specification
 ------------------------------
 
 The Audio Translation flavor uses the Scripture Burrito Alignment
@@ -553,12 +590,12 @@ references with timed sections. Rather than redefining these concepts,
 the Audio Translation flavor adopts the Alignment Specification for
 representing timing information.
 
-2.10.2 Wrapper Specification
+Wrapper Specification
 ---------------------------
 
 TODO
 
-2.11 Additional Examples
+Additional Examples
 ------------------------
 
 Additional examples demonstrating the use of the Audio Translation
@@ -569,7 +606,7 @@ specification are available in the
 These examples provide practical reference implementations and sample
 Scripture Burrito audio translation packages.
 
-2.12 References
+References
 ===============
 
 *WebVTT: The Web Video Text Tracks Format*. W3C Recommendation.

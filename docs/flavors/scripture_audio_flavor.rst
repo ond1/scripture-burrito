@@ -335,30 +335,6 @@ property MUST be present. Keys MUST be valid USFM book codes. Values are
 arrays of chapter numbers as strings (e.g. ``["1", "2", "3"]``); or as chapter:verse as strings 
 (e.g. ``["1:1-21", "2:1-5"]``); an empty array means all chapters are present.
 
-The following example illustrates the ``type`` object:
-
-.. example:: Type with current scope
-
-   .. code-block:: json
-
-      {
-        "type": {
-          "flavorType": {
-            "name": "scripture",
-            "flavor": {
-              "name": "audioTranslation"
-            },
-            "currentScope": {
-              "TIT": [
-                "1",
-                "2",
-                "3"
-              ]
-            }
-          }
-        }
-      }
-
 Languages
 -------------
 

@@ -491,24 +491,24 @@ names MUST begin with the prefix ``x-``.
 
 Common audio-specific extension properties include:
 
-+------------------------+-----------------------+-----------------------+
-| Property               | Description           | Example               |
-+========================+=======================+=======================+
-| ``x-compression``      | The audio compression | ``MP3``, ``WAV``,     |
-|                        | or container format.  | ``FLAC``              |
-+------------------------+-----------------------+-----------------------+
-| ``x-bitRate``          | The encoded audio bit | ``128000``            |
-|                        | rate.                 |                       |
-+------------------------+-----------------------+-----------------------+
-| ``x-bitDepth``         | The audio sample bit  | ``16``                |
-|                        | depth.                |                       |
-+------------------------+-----------------------+-----------------------+
-| ``x-samplingRate``     | The audio sampling    | ``44100``             |
-|                        | frequency, in hertz.  |                       |
-+------------------------+-----------------------+-----------------------+
-| ``x-trackConfiguration`` | The audio channel   | ``mono``, ``stereo``  |
-|                        | configuration.        |                       |
-+------------------------+-----------------------+
++-------------------------+-----------------------+-----------------------+
+| Property                | Description           | Example               |
++=========================+=======================+=======================+
+| ``x-compression``       | The audio compression | ``MP3``, ``WAV``,     |
+|                         | or container format.  | ``FLAC``              |
++-------------------------+-----------------------+-----------------------+
+| ``x-bitRate``           | The encoded audio bit | ``128000``            |
+|                         | rate.                 |                       |
++-------------------------+-----------------------+-----------------------+
+| ``x-bitDepth``          | The audio sample bit  | ``16``                |
+|                         | depth.                |                       |
++-------------------------+-----------------------+-----------------------+
+| ``x-samplingRate``      | The audio sampling    | ``44100``             |
+|                         | frequency, in hertz.  |                       |
++-------------------------+-----------------------+-----------------------+
+| ``x-trackConfiguration``| The audio channel     | ``mono``, ``stereo``  |
+|                         | configuration.        |                       |
++-------------------------+-----------------------+-----------------------+
 
 Applications MAY define additional extension properties where
 appropriate without requiring changes to the core Scripture Burrito

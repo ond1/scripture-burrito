@@ -1,8 +1,17 @@
-# Scripture Burrito Wrapper Specification
+.. _wrapper_flavor:
 
-1. Overview
+################################
+Scripture Burrito Wrapper Specification
+################################
 
----
+[:ref:`Tutorial <tutorial-audioTranslation>`]
+[:ref:`Example <examples-audioTranslation>`]
+
+Wrapper Flavor
+==========================
+
+Overview
+------------
 
 A Scripture Burrito Wrapper provides a way to group multiple related
 Scripture Burritos into a single project or distribution. Each contained
@@ -77,8 +86,8 @@ used to illustrate the various parts of this specification.
    }
 
 
-## 2. Wrapper Structure
---------
+Wrapper Structure
+------------
 
 A wrapper MUST contain the following top-level properties:
 
@@ -96,7 +105,7 @@ The `contents` property identifies the Scripture Burritos contained
 within the wrapper.
 
 2.1 Meta
---------
+------------
 
 The ``meta`` object describes the wrapper and MUST contain:
 
@@ -116,7 +125,7 @@ burritos contained within it. Each contained burrito MUST provide its own
 ``metadata.json``.
 
 2.1.1 Name
---------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``name`` property contains one or more localized names for the
 wrapper.
@@ -229,7 +238,7 @@ of the localized metadata properties.
 
 
 2.2 Contents
-```
+------------
 
 The `contents` object MUST contain a `burritos` array.
 
@@ -237,7 +246,7 @@ Each entry identifies one Scripture Burrito contained within the wrapper.
 
 For example::
 
-```
+
 "contents": {
   "burritos": [
     {
@@ -252,7 +261,7 @@ For example::
     }
   ]
 }
-```
+
 
 The `burritos` array MUST contain at least one entry. Each entry MUST
 contain:
@@ -264,7 +273,7 @@ contain:
 The `path` is relative to the directory containing `wrapper.json`.
 
 2.3 Contained Burritos
---------
+------------
 
 Each entry in ``contents.burritos`` MUST identify a valid Scripture
 Burrito or another valid Scripture Burrito Wrapper.
@@ -296,7 +305,7 @@ For example::
 
 
 2.4 Burrito Roles
-------------------
+------------
 
 The ``role`` property describes the relationship of a contained burrito
 to the other burritos in the wrapper.
@@ -341,14 +350,15 @@ merged into a single burrito.
 The flavour of each contained burrito is determined by its own
 `metadata.json`.
 
-For example::
+.. admonition:: Multiple Flavors
+   :class: example
 
-
-{
-  "id": "SEHSAM-audio",
-  "path": "audio",
-  "role": "source"
-}
+   .. code-block:: json
+      {
+        "id": "SEHSAM-audio",
+        "path": "audio",
+        "role": "source"
+      }
 
 
 The flavour of this burrito is determined by::
@@ -375,8 +385,7 @@ This separation allows each flavour to evolve independently while still
 allowing related resources to be distributed together.
 
 2.6 Wrapper and Contained Burrito Independence
-
-```
+------------
 
 The wrapper and the contained Scripture Burritos have separate scopes.
 
@@ -397,7 +406,7 @@ contained resources.
 
 
 2.7 Wrapper Flavour Independence
-------------------
+------------
 
 A wrapper MUST NOT make assumptions about the flavour of a contained
 burrito. The flavour MUST be determined from the metadata of the

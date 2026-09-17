@@ -485,17 +485,3 @@ Additional examples and sample Scripture Burrito audio translation
 packages can be found in the ``sb_audioTranslation`` GitHub repository::
 
     https://github.com/bible-technology/sb_audioTranslation
-
-### A couple of points I changed deliberately
-
-- **Kept your complete example** and made it the central reference example.
-- Changed **“Burrito Burrito Wrapper”** to **“Scripture Burrito Wrapper”** in the prose and admonition title. If “Burrito Burrito” is intentional in the actual project terminology, it can of course be retained.
-- Filled in the `name` section as: **language/locale code → human-readable localized name**.
-- Added **2.6** rather than jumping from 2.5 to 2.7.
-- Added **Nested Wrappers** because you explicitly permit them in 2.3.
-- Added **Validation**, which is useful for making the specification implementable.
-- Kept the distinction that the **wrapper describes relationships**, while the individual Burrito's `metadata.json` defines its flavour.
-- Corrected the table formatting and wording around `source`, `derived`, and `supplemental`.
-- Changed “a language property name” to the clearer **“each property name is a language or locale code”**.
-
-One thing I would **not** yet make normative is the exact versioning scheme for `meta.version` unless the main Scripture Burrito specification already defines that. The wording above deliberately avoids introducing a potentially conflicting versioning rule.

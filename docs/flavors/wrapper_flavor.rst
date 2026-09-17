@@ -1,11 +1,9 @@
 .. _wrapper_flavor:
 
-################################
+########################################
 Scripture Burrito Wrapper Specification
-################################
+########################################
 
-[:ref:`Tutorial <tutorial-audioTranslation>`]
-[:ref:`Example <examples-audioTranslation>`]
 
 Wrapper Flavor
 ==========================
@@ -34,60 +32,60 @@ The following example shows a complete Scripture Burrito Wrapper and is
 used to illustrate the various parts of this specification.
 
 .. admonition:: Full Scripture Burrito Wrapper
-:class: example
+   :class: example
 
-.. code-block:: json
+   .. code-block:: json
 
+      {
+        "meta": {
+          "name": {
+            "en": "Sample Burrito Burrito Wrapper"
+          },
+          "version": "0.0.1",
+          "generator": {
+            "name": "Audio Project Manager Train",
+            "version": "4.6.0.alpha.0"
+          },
+          "dateCreated": "2026-08-13",
+          "description": {
+            "en": "A new burrito wrapper for Sample Burrito"
+          },
+          "abbreviation": {
+            "en": "SEHSAM"
+          },
+          "defaultLocale": "en"
+        },
+        "format": "scripture burrito wrapper",
+        "contents": {
+          "burritos": [
+            {
+              "id": "SEHSAM-aPMData",
+              "path": "apmdata",
+              "role": "supplemental"
+            },
+            {
+              "id": "SEHSAM-text",
+              "path": "text",
+              "role": "derived"
+            },
+            {
+              "id": "SEHSAM-audio",
+              "path": "audio",
+              "role": "source"
+            },
+            {
+              "id": "SEHSAM-intellectualProperty",
+              "path": "intellectualproperty",
+              "role": "supplemental"
+            }
+          ]
+        }
+      }
 
-   {
-     "meta": {
-       "name": {
-         "en": "Sample Burrito Burrito Wrapper"
-       },
-       "version": "0.0.1",
-       "generator": {
-         "name": "Audio Project Manager Train",
-         "version": "4.6.0.alpha.0"
-       },
-       "dateCreated": "2026-08-13",
-       "description": {
-         "en": "A new burrito wrapper for Sample Burrito"
-       },
-       "abbreviation": {
-         "en": "SEHSAM"
-       },
-       "defaultLocale": "en"
-     },
-     "format": "scripture burrito wrapper",
-     "contents": {
-       "burritos": [
-         {
-           "id": "SEHSAM-aPMData",
-           "path": "apmdata",
-           "role": "supplemental"
-         },
-         {
-           "id": "SEHSAM-text",
-           "path": "text",
-           "role": "derived"
-         },
-         {
-           "id": "SEHSAM-audio",
-           "path": "audio",
-           "role": "source"
-         },
-         {
-           "id": "SEHSAM-intellectualProperty",
-           "path": "intellectualproperty",
-           "role": "supplemental"
-         }
-       ]
-     }
-   }
 
 
 Wrapper Structure
-------------
+-----------------
 
 A wrapper MUST contain the following top-level properties:
 
@@ -151,7 +149,7 @@ The language or locale codes SHOULD follow the conventions defined by
 the Scripture Burrito specification.
 
 2.1.2 Version
---------
+--------------
 
 The ``version`` property identifies the version of the wrapper.
 
@@ -163,7 +161,7 @@ For example::
     "version": "0.0.1"
 
 2.1.3 Generator
---------
+---------------
 
 The ``generator`` property identifies the software or process that
 created the wrapper.
@@ -181,7 +179,7 @@ For example::
     }
 
 2.1.4 Date Created
---------
+--------------------
 
 The ``dateCreated`` property identifies the date on which the wrapper
 was created.
@@ -196,7 +194,7 @@ The ``dateCreated`` property applies to the wrapper itself and does not
 necessarily represent the creation date of the contained burritos.
 
 2.1.5 Description
-'''''''''''''''''
+--------------------
 
 The optional ``description`` property provides a human-readable
 description of the wrapper.
@@ -210,7 +208,7 @@ For example::
     }
 
 2.1.6 Abbreviation
---------
+-------------------
 
 The optional ``abbreviation`` property provides a short name or
 abbreviation for the wrapper.
@@ -224,7 +222,7 @@ For example::
     }
 
 2.1.7 Default Locale
---------
+---------------------
 
 The optional ``defaultLocale`` property identifies the default language
 or locale to use when localized metadata is available.
@@ -244,23 +242,26 @@ The `contents` object MUST contain a `burritos` array.
 
 Each entry identifies one Scripture Burrito contained within the wrapper.
 
-For example::
 
+.. admonition:: Contents Example
+   :class: example
 
-"contents": {
-  "burritos": [
-    {
-      "id": "ENGSEB2-audio",
-      "path": "audio",
-      "role": "source"
-    },
-    {
-      "id": "ENGSEB2-text",
-      "path": "text",
-      "role": "derived"
-    }
-  ]
-}
+   .. code-block:: json
+
+      "contents": {
+        "burritos": [
+          {
+            "id": "ENGSEB2-audio",
+            "path": "audio",
+            "role": "source"
+          },
+          {
+            "id": "ENGSEB2-text",
+            "path": "text",
+            "role": "derived"
+          }
+        ]
+      }
 
 
 The `burritos` array MUST contain at least one entry. Each entry MUST
@@ -273,7 +274,7 @@ contain:
 The `path` is relative to the directory containing `wrapper.json`.
 
 2.3 Contained Burritos
-------------
+-----------------------
 
 Each entry in ``contents.burritos`` MUST identify a valid Scripture
 Burrito or another valid Scripture Burrito Wrapper.
@@ -305,7 +306,7 @@ For example::
 
 
 2.4 Burrito Roles
-------------
+------------------
 
 The ``role`` property describes the relationship of a contained burrito
 to the other burritos in the wrapper.
@@ -319,7 +320,7 @@ The standard roles are:
 +-------------------+-----------------------------------------------------------+
 | ``derived``       | Content produced from another burrito.                    |
 +-------------------+-----------------------------------------------------------+
-| ``supplemental``  | Supporting material that is not itself the primary         |
+| ``supplemental``  | Supporting material that is not itself the primary        |
 |                   | Scripture deliverable.                                    |
 +-------------------+-----------------------------------------------------------+
 
@@ -331,7 +332,7 @@ not determine the flavour of the contained burrito.
 
 
 2.5 Supporting Multiple Flavours
-------------------
+---------------------------------
 
 A wrapper MAY contain any combination of supported Scripture Burrito
 flavours.
@@ -361,31 +362,33 @@ The flavour of each contained burrito is determined by its own
       }
 
 
-The flavour of this burrito is determined by::
+The flavour of this burrito is determined by:
 
 audio/metadata.json
 
-Similarly::
 
 
-{
-  "id": "SEHSAM-text",
-  "path": "text",
-  "role": "derived"
-}
+.. admonition:: Contained Burrito Example
+   :class: example
 
+   .. code-block:: json
 
-gets its flavour from::
+      {
+        "id": "SEHSAM-text",
+        "path": "text",
+        "role": "derived"
+      }
 
-```
+gets its flavour from:
+
 text/metadata.json
-```
+
 
 This separation allows each flavour to evolve independently while still
 allowing related resources to be distributed together.
 
 2.6 Wrapper and Contained Burrito Independence
-------------
+------------------------------------------------
 
 The wrapper and the contained Scripture Burritos have separate scopes.
 
@@ -405,8 +408,8 @@ collection as a whole or describes the relationship between the
 contained resources.
 
 
-2.7 Wrapper Flavour Independence
-------------
+2.7 Wrapper Flavour 
+---------------------
 
 A wrapper MUST NOT make assumptions about the flavour of a contained
 burrito. The flavour MUST be determined from the metadata of the
@@ -420,7 +423,7 @@ Scripture Burrito flavour independently defined and validated.
 
 
 2.8 Nested Wrappers
-------------------
+---------------------
 
 A Scripture Burrito Wrapper MAY contain another Scripture Burrito
 Wrapper.
@@ -479,7 +482,7 @@ each burrito.
 
 
 2.10 Additional Examples
-------------------
+-------------------------
 
 Additional examples and sample Scripture Burrito audio translation
 packages can be found in the ``sb_audioTranslation`` GitHub repository::

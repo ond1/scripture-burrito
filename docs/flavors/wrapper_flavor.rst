@@ -29,7 +29,7 @@ used to illustrate the various parts of this specification.
 
 .. code-block:: json
 
-```
+
    {
      "meta": {
        "name": {
@@ -75,9 +75,10 @@ used to illustrate the various parts of this specification.
        ]
      }
    }
-```
+
 
 ## 2. Wrapper Structure
+--------
 
 A wrapper MUST contain the following top-level properties:
 
@@ -89,16 +90,13 @@ The `meta` property contains metadata describing the wrapper itself.
 
 The `format` property MUST have the value::
 
-```
 "format": "scripture burrito wrapper"
-```
 
 The `contents` property identifies the Scripture Burritos contained
 within the wrapper.
 
 2.1 Meta
-
-```
+--------
 
 The ``meta`` object describes the wrapper and MUST contain:
 
@@ -118,7 +116,7 @@ burritos contained within it. Each contained burrito MUST provide its own
 ``metadata.json``.
 
 2.1.1 Name
-''''''''''
+--------
 
 The ``name`` property contains one or more localized names for the
 wrapper.
@@ -144,7 +142,7 @@ The language or locale codes SHOULD follow the conventions defined by
 the Scripture Burrito specification.
 
 2.1.2 Version
-'''''''''''''
+--------
 
 The ``version`` property identifies the version of the wrapper.
 
@@ -156,7 +154,7 @@ For example::
     "version": "0.0.1"
 
 2.1.3 Generator
-''''''''''''''
+--------
 
 The ``generator`` property identifies the software or process that
 created the wrapper.
@@ -174,7 +172,7 @@ For example::
     }
 
 2.1.4 Date Created
-''''''''''''''''''
+--------
 
 The ``dateCreated`` property identifies the date on which the wrapper
 was created.
@@ -203,7 +201,7 @@ For example::
     }
 
 2.1.6 Abbreviation
-'''''''''''''''''
+--------
 
 The optional ``abbreviation`` property provides a short name or
 abbreviation for the wrapper.
@@ -217,7 +215,7 @@ For example::
     }
 
 2.1.7 Default Locale
-''''''''''''''''''''
+--------
 
 The optional ``defaultLocale`` property identifies the default language
 or locale to use when localized metadata is available.
@@ -266,8 +264,7 @@ contain:
 The `path` is relative to the directory containing `wrapper.json`.
 
 2.3 Contained Burritos
-
-```
+--------
 
 Each entry in ``contents.burritos`` MUST identify a valid Scripture
 Burrito or another valid Scripture Burrito Wrapper.
@@ -299,7 +296,7 @@ For example::
 
 
 2.4 Burrito Roles
-~~~~~~~~~~~~~~~~~
+------------------
 
 The ``role`` property describes the relationship of a contained burrito
 to the other burritos in the wrapper.
@@ -325,7 +322,7 @@ not determine the flavour of the contained burrito.
 
 
 2.5 Supporting Multiple Flavours
-```
+------------------
 
 A wrapper MAY contain any combination of supported Scripture Burrito
 flavours.
@@ -346,29 +343,27 @@ The flavour of each contained burrito is determined by its own
 
 For example::
 
-```
+
 {
   "id": "SEHSAM-audio",
   "path": "audio",
   "role": "source"
 }
-```
+
 
 The flavour of this burrito is determined by::
 
-```
 audio/metadata.json
-```
 
 Similarly::
 
-```
+
 {
   "id": "SEHSAM-text",
   "path": "text",
   "role": "derived"
 }
-```
+
 
 gets its flavour from::
 
@@ -402,7 +397,7 @@ contained resources.
 
 
 2.7 Wrapper Flavour Independence
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------
 
 A wrapper MUST NOT make assumptions about the flavour of a contained
 burrito. The flavour MUST be determined from the metadata of the
@@ -416,7 +411,7 @@ Scripture Burrito flavour independently defined and validated.
 
 
 2.8 Nested Wrappers
-~~~~~~~~~~~~~~~~~~~
+------------------
 
 A Scripture Burrito Wrapper MAY contain another Scripture Burrito
 Wrapper.
@@ -445,7 +440,7 @@ references between wrappers are not permitted.
 
 
 2.9 Validation
-~~~~~~~~~~~~~~
+------------------
 
 A Scripture Burrito Wrapper MUST be independently valid according to
 this specification.
@@ -475,7 +470,7 @@ each burrito.
 
 
 2.10 Additional Examples
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------
 
 Additional examples and sample Scripture Burrito audio translation
 packages can be found in the ``sb_audioTranslation`` GitHub repository::
@@ -495,4 +490,3 @@ packages can be found in the ``sb_audioTranslation`` GitHub repository::
 - Changed “a language property name” to the clearer **“each property name is a language or locale code”**.
 
 One thing I would **not** yet make normative is the exact versioning scheme for `meta.version` unless the main Scripture Burrito specification already defines that. The wording above deliberately avoids introducing a potentially conflicting versioning rule.
-```

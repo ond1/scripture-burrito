@@ -1,7 +1,7 @@
 Scripture Burrito Wrapper Specification
 =====================================
 
-1. Introduction
+1. Overview
 ----------------
 
 A Scripture Burrito Wrapper provides a way to group multiple related
@@ -20,6 +20,59 @@ flavours to be distributed together.
 
 The wrapper is represented by a ``wrapper.json`` file located at the root
 of the wrapper package.
+
+The following example shows a complete Burrito Burrito Wrapper and is used to illustrate the various parts of this specification.
+
+.. admonition:: Full Burrito Burrito Wrapper
+   :class: example
+
+   .. code-block:: json
+
+       {
+      "meta": {
+        "name": {
+          "en": "Sample Burrito Burrito Wrapper"
+        },
+        "version": "0.0.1",
+        "generator": {
+          "name": "Audio Project Manager Train",
+          "version": "4.6.0.alpha.0"
+        },
+        "dateCreated": "2026-08-13",
+        "description": {
+          "en": "A new burrito wrapper for Sample Burrito"
+        },
+        "abbreviation": {
+          "en": "SEHSAM"
+        },
+        "defaultLocale": "en"
+      },
+      "format": "scripture burrito wrapper",
+      "contents": {
+        "burritos": [
+          {
+            "id": "SEHSAM-aPMData",
+            "path": "apmdata",
+            "role": "supplemental"
+          },
+          {
+            "id": "SEHSAM-text",
+            "path": "text",
+            "role": "derived"
+          },
+          {
+            "id": "SEHSAM-audio",
+            "path": "audio",
+            "role": "source"
+          },
+          {
+            "id": "SEHSAM-intellectualProperty",
+            "path": "intellectualproperty",
+            "role": "supplemental"
+          }
+        ]
+      }
+    }
 
 
 2. Wrapper Structure
@@ -201,58 +254,7 @@ gets its flavour from::
 This separation allows each flavour to evolve independently while still
 allowing related resources to be distributed together.
 
-
-2.6 Example
-~~~~~~~~~~~
-
-The following example demonstrates a wrapper containing audio, text,
-APM data, and intellectual property burritos::
-
-    {
-      "meta": {
-        "name": {
-          "en": "Sample Burrito Burrito Wrapper"
-        },
-        "version": "0.0.1",
-        "generator": {
-          "name": "Audio Project Manager Train",
-          "version": "4.6.0.alpha.0"
-        },
-        "dateCreated": "2026-08-13",
-        "description": {
-          "en": "A new burrito wrapper for Sample Burrito"
-        },
-        "abbreviation": {
-          "en": "SEHSAM"
-        },
-        "defaultLocale": "en"
-      },
-      "format": "scripture burrito wrapper",
-      "contents": {
-        "burritos": [
-          {
-            "id": "SEHSAM-aPMData",
-            "path": "apmdata",
-            "role": "supplemental"
-          },
-          {
-            "id": "SEHSAM-text",
-            "path": "text",
-            "role": "derived"
-          },
-          {
-            "id": "SEHSAM-audio",
-            "path": "audio",
-            "role": "source"
-          },
-          {
-            "id": "SEHSAM-intellectualProperty",
-            "path": "intellectualproperty",
-            "role": "supplemental"
-          }
-        ]
-      }
-    }
+   
 
 
 2.7 Wrapper Flavour Independence

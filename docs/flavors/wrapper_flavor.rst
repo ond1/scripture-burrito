@@ -97,7 +97,7 @@ A wrapper MUST contain the following top-level properties:
 * `format`
 * `contents`
 
-n the following sections we will break down and describe each property and its sub-rpoperties they contain.
+In the following sections we will break down and describe each property and its sub-properties they contain.
 
 Meta
 ------------
@@ -123,7 +123,7 @@ The metadata applies to the *wrapper*, rather than to the individual
 burritos contained within it. Each contained burrito MUST provide its own
 ``metadata.json``.
 
-2.1.1 Name
+Name
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``name`` property contains one or more localized names for the
@@ -179,13 +179,23 @@ For example::
       "version": "4.6.0.alpha.0"
     }
 
+The ``name`` property is specified by the creator. This property best describes the name of the software.
+The ``version`` property specifies the version of the software used to create the wrapper and is presented as a textual data.
+
 2.1.4 Date Created
 --------------------
 
 The ``dateCreated`` property identifies the date on which the wrapper
 was created.
 
-The value MUST be represented as a date in the format ``YYYY-MM-DD``.
+The value MUST be represented as a date in the format ``YYYY-MM-DD``. This is in the
+**ISO 8601 calendar date format**.
+
+Where:
+
+* ``YYYY`` = four-digit year → ``2026``
+* ``MM`` = two-digit month → ``08`` (August)
+* ``DD`` = two-digit day → ``13``
 
 For example::
 
@@ -197,8 +207,8 @@ necessarily represent the creation date of the contained burritos.
 2.1.5 Description
 --------------------
 
-The optional ``description`` property provides a human-readable
-description of the wrapper.
+The optional ``description`` property provides descriptive text
+about the wrapper.
 
 The description MAY be provided in multiple languages or locales.
 
@@ -218,22 +228,31 @@ The abbreviation MAY be provided in multiple languages or locales.
 
 For example::
 
-    "abbreviation": {
-      "en": "SEHSAM"
-    }
+.. admonition:: Abbreviation Example
+   :class: example
+
+   .. code-block:: json
+
+       "abbreviation": {
+         "en": "SEHSAM"
+       }
 
 2.1.7 Default Locale
 ---------------------
 
-The optional ``defaultLocale`` property identifies the default language
-or locale to use when localized metadata is available.
+The ``defaultLocale`` property identifies the default language or locale
+of the wrapper.
+
+The value MUST be a valid BCP 47 language tag.
 
 For example::
 
     "defaultLocale": "en"
 
-The value SHOULD correspond to a language or locale used by one or more
-of the localized metadata properties.
+The value ``en`` identifies the English language. More specific language
+tags MAY be used where required, such as ``en-US`` for English as used
+in the United States or ``en-GB`` for English as used in the United
+Kingdom.
 
 
 2.2 Contents

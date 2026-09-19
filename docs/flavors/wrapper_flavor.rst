@@ -28,8 +28,12 @@ flavours to be distributed together.
 The wrapper is represented by a `wrapper.json` file located at the root
 of the wrapper package.
 
-The following example shows a complete Scripture Burrito Wrapper and is
-used to illustrate the various parts of this specification.
+The following example shows a Scripture Burrito Wrapper containing four
+related Scripture Burritos. The wrapper contains an APM data burrito as
+a supplemental project information, a text translation burrito derived from
+the source content containing specific bible text, an audio translation burrito representing the primary
+source content, and an intellectual property burrito containing supporting
+rights and licensing information:
 
 .. admonition:: Full Scripture Burrito Wrapper
    :class: example

@@ -29,7 +29,7 @@ The wrapper is represented by a `wrapper.json` file located at the root
 of the wrapper package.
 
 The following example shows a Scripture Burrito Wrapper containing four related Scripture Burritos. 
-The wrapper contains an APM data burrito providing supplemental project information, a text 
+The wrapper contains a data burrito providing supplemental project information, a text 
 translation burrito containing specific Bible text derived from the source content, an audio 
 translation burrito containing information specific to the biblical audio files in the directory 
 and representing the primary source content, and an intellectual property burrito containing 
@@ -64,7 +64,7 @@ supporting rights and licensing information:
           "burritos": [
             {
               "id": "SEHSAM-aPMData",
-              "path": "apmdata",
+              "path": "data",
               "role": "supplemental"
             },
             {

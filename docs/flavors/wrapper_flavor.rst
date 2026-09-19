@@ -86,7 +86,20 @@ supporting rights and licensing information:
         }
       }
 
+This wrapper contains four Scripture Burritos, each located in a separate
+directory within the wrapper package. The directory structure is as
+follows::
 
+    project/
+    ├── wrapper.json
+    ├── audio/
+    │   └── metadata.json
+    ├── text/
+    │   └── metadata.json
+    ├── apmdata/
+    │   └── metadata.json
+    └── intellectualproperty/
+        └── metadata.json
 
 Wrapper Structure
 -----------------
@@ -226,16 +239,14 @@ abbreviation for the wrapper.
 
 The abbreviation MAY be provided in multiple languages or locales.
 
-For example::
-
 .. admonition:: Abbreviation Example
    :class: example
 
    .. code-block:: json
 
-       "abbreviation": {
-         "en": "SEHSAM"
-       }
+      "abbreviation": {
+        "en": "SEHSAM"
+      }
 
 2.1.7 Default Locale
 ---------------------
@@ -308,21 +319,6 @@ Nested wrappers are permitted, but circular references MUST NOT occur.
 The flavor of a contained burrito is determined by its own
 ``metadata.json``. The wrapper MUST NOT duplicate or override the flavor
 information.
-
-This allows a wrapper to contain burritos of different flavors.
-
-For example::
-
-    project/
-    ├── wrapper.json
-    ├── audio/
-    │   └── metadata.json
-    ├── text/
-    │   └── metadata.json
-    ├── apmdata/
-    │   └── metadata.json
-    └── intellectualproperty/
-        └── metadata.json
 
 
 2.4 Burrito Roles

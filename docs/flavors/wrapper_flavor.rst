@@ -26,7 +26,8 @@ management data, intellectual property information, and other supported
 flavors to be distributed together.
 
 The wrapper is represented by a `wrapper.json` file located at the root
-of the wrapper package.
+of the wrapper package. Each contained burrito MUST provide its own
+``metadata.json``.
 
 The following example shows a Scripture Burrito Wrapper containing four related Scripture Burritos. 
 The wrapper contains a data burrito providing supplemental project information, a text 
@@ -119,7 +120,7 @@ The meta property contains metadata describing the Scripture Burrito Wrapper its
 about the wrapper as a whole and optional descriptive information. 
 The metadata does not apply to the individual Scripture Burritos contained within the wrapper.
 
-The ``meta`` object describes the wrapper and MUST contain:
+The ``meta`` object MUST contain the following properties:
 
 * ``name``
 * ``version``
@@ -132,9 +133,6 @@ It MAY also contain:
 * ``abbreviation``
 * ``defaultLocale``
 
-The metadata applies to the *wrapper*, rather than to the individual
-burritos contained within it. Each contained burrito MUST provide its own
-``metadata.json``.
 
 Name
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -193,7 +191,7 @@ For example::
     }
 
 The ``name`` property is specified by the creator. This property best describes the name of the software.
-The ``version`` property specifies the version of the software used to create the wrapper and is presented as a textual data.
+The ``version`` property specifies the version of the software used to create the wrapper and is presented as a string.
 
 Date Created
 ~~~~~~~~~~~~~~~~

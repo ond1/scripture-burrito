@@ -162,8 +162,8 @@ A wrapper MAY provide names in multiple languages or locales::
 The language or locale codes SHOULD follow the conventions defined by
 the Scripture Burrito specification.
 
-2.1.2 Version
---------------
+Version
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``version`` property identifies the version of the wrapper.
 
@@ -174,8 +174,8 @@ For example::
 
     "version": "0.0.1"
 
-2.1.3 Generator
----------------
+Generator
+~~~~~~~~~~~~~
 
 The ``generator`` property identifies the software or process that
 created the wrapper.
@@ -195,8 +195,8 @@ For example::
 The ``name`` property is specified by the creator. This property best describes the name of the software.
 The ``version`` property specifies the version of the software used to create the wrapper and is presented as a textual data.
 
-2.1.4 Date Created
---------------------
+Date Created
+~~~~~~~~~~~~~~~~
 
 The ``dateCreated`` property identifies the date on which the wrapper
 was created.
@@ -217,8 +217,8 @@ For example::
 The ``dateCreated`` property applies to the wrapper itself and does not
 necessarily represent the creation date of the contained burritos.
 
-2.1.5 Description
---------------------
+Description
+~~~~~~~~~~~~~~~~~~
 
 The optional ``description`` property provides descriptive text
 about the wrapper.
@@ -231,8 +231,8 @@ For example::
       "en": "A new burrito wrapper for Sample Burrito"
     }
 
-2.1.6 Abbreviation
--------------------
+Abbreviation
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The optional ``abbreviation`` property provides a short name or
 abbreviation for the wrapper.
@@ -248,8 +248,8 @@ The abbreviation MAY be provided in multiple languages or locales.
         "en": "SEHSAM"
       }
 
-2.1.7 Default Locale
----------------------
+Default Locale
+~~~~~~~~~~~~~~~~~~
 
 The ``defaultLocale`` property identifies the default language or locale
 of the wrapper.
@@ -266,7 +266,7 @@ in the United States or ``en-GB`` for English as used in the United
 Kingdom.
 
 
-2.2 Contents
+Contents
 ------------
 
 The `contents` object MUST contain a `burritos` array.
@@ -304,7 +304,7 @@ contain:
 
 The `path` is relative to the directory containing `wrapper.json`.
 
-2.3 Contained Burritos
+Contained Burritos
 -----------------------
 
 Each entry in ``contents.burritos`` MUST identify a valid Scripture
@@ -321,7 +321,7 @@ The flavor of a contained burrito is determined by its own
 information.
 
 
-2.4 Burrito Roles
+Burrito Roles
 ------------------
 
 The ``role`` property describes the relationship of a contained burrito
@@ -347,7 +347,7 @@ The role is a property of the relationship within the wrapper and does
 not determine the flavor of the contained burrito.
 
 
-2.5 Supporting Multiple flavors
+Supporting Multiple flavors
 ---------------------------------
 
 A wrapper MAY contain any combination of supported Scripture Burrito
@@ -403,7 +403,7 @@ text/metadata.json
 This separation allows each flavor to evolve independently while still
 allowing related resources to be distributed together.
 
-2.6 Wrapper and Contained Burrito Independence
+Wrapper and Contained Burrito Independence
 ------------------------------------------------
 
 The wrapper and the contained Scripture Burritos have separate scopes.
@@ -424,7 +424,7 @@ collection as a whole or describes the relationship between the
 contained resources.
 
 
-2.7 Wrapper flavor 
+Wrapper flavor 
 ---------------------
 
 A wrapper MUST NOT make assumptions about the flavor of a contained
@@ -438,7 +438,7 @@ This allows the wrapper to group related resources while keeping each
 Scripture Burrito flavor independently defined and validated.
 
 
-2.8 Nested Wrappers
+Nested Wrappers
 ---------------------
 
 A Scripture Burrito Wrapper MAY contain another Scripture Burrito
@@ -467,7 +467,7 @@ A wrapper MUST NOT directly or indirectly contain itself. Circular
 references between wrappers are not permitted.
 
 
-2.9 Validation
+Validation
 ------------------
 
 A Scripture Burrito Wrapper MUST be independently valid according to
@@ -497,7 +497,7 @@ burrito specifications remain responsible for validating the contents of
 each burrito.
 
 
-2.10 Additional Examples
+Additional Examples
 -------------------------
 
 Additional examples and sample Scripture Burrito audio translation

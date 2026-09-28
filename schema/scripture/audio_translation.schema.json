@@ -6,5 +6,15 @@
     ],
     "title": "Flavor Details: Audio Translation",
     "type": "object",
-    "description": "Schema of flavor field of scripture/audioTranslation flavor"
+    "description": "Describes the flavor details of an audio translation.",
+    "properties": {
+        "name": {
+            "type": "string",
+            "const": "audioTranslation"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "additionalProperties": false
 }

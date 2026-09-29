@@ -154,7 +154,7 @@ A wrapper MAY provide names in multiple languages or locales::
 
     "name": {
       "en": "Sample Scripture Project",
-      "fr": "Projet biblique exemple"
+      "fr": "Exemple de projet biblique"
     }
 
 The language or locale codes SHOULD follow the conventions defined by
@@ -450,13 +450,10 @@ For example::
     project/
     ├── wrapper.json
     ├── translations/
-    │   ├── wrapper.json
     │   ├── audio/
     │   │   └── metadata.json
     │   └── text/
     │       └── metadata.json
-    └── supporting/
-        └── wrapper.json
 
 The ``path`` of a nested wrapper MUST identify the directory containing
 the nested ``wrapper.json``.

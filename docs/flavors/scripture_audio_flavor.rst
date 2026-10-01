@@ -37,7 +37,7 @@ project. Wrappers are described in the :ref:`Wrapper Specification <wrapper_flav
 The following example shows a complete Scripture Burrito for the 
 Audio Translation flavor and is used to illustrate the various parts of this specification.
 
-.. admonition:: Full Audio Translation flavor
+.. admonition:: Full Audio Translation flavor Example
    :class: example
 
    .. code-block:: json

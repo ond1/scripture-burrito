@@ -29,11 +29,11 @@ The wrapper is represented by a `wrapper.json` file located at the root
 of the wrapper package. Each contained burrito MUST provide its own
 ``metadata.json``.
 
-The following example shows a Scripture Burrito Wrapper containing four related Scripture Burritos. 
-The wrapper contains a data burrito providing supplemental project information, a text 
-translation burrito containing specific Bible text derived from the source content, an audio 
-translation burrito containing information specific to the biblical audio files in the directory 
-and representing the primary source content, and an intellectual property burrito containing 
+The following example shows a Scripture Burrito Wrapper containing four
+related Scripture Burritos: a data burrito providing supplemental
+project information, a text translation burrito containing derived
+Bible text, an audio translation burrito representing the primary
+source content, and an intellectual property burrito containing
 supporting rights and licensing information:
 
 .. admonition:: Full Scripture Burrito Wrapper
@@ -109,16 +109,18 @@ A wrapper MUST contain the following top-level properties:
 
 * `meta`
 * `format`
-* `contents`
+* ``contents``
 
-In the following sections we will break down and describe each property and its sub-properties they contain.
+The following sections describe each property and its sub-properties.
 
 Meta
 ------------
 
-The meta property contains metadata describing the Scripture Burrito Wrapper itself. It identifies and provides information 
-about the wrapper as a whole and optional descriptive information. 
-The metadata does not apply to the individual Scripture Burritos contained within the wrapper.
+The ``meta`` property contains metadata describing the Scripture Burrito
+Wrapper itself. It identifies the wrapper and provides information
+about it as a whole. It does not apply to the individual Scripture
+Burritos contained within the wrapper.
+
 
 The ``meta`` object MUST contain the following properties:
 
@@ -190,8 +192,11 @@ For example::
       "version": "4.6.0.alpha.0"
     }
 
-The ``name`` property is specified by the author. This property best describes the name of the software.
-The ``version`` property specifies the version of the software used to create the wrapper and is presented as a string.
+The ``name`` property specifies the name of the software or process
+that created the wrapper.
+
+The ``version`` property specifies the version of the software used to
+create the wrapper and MUST be represented as a string.
 
 Date Created
 ~~~~~~~~~~~~~~~~
@@ -199,8 +204,8 @@ Date Created
 The ``dateCreated`` property identifies the date on which the wrapper
 was created.
 
-The value MUST be represented as a date in the format ``YYYY-MM-DD``. This is in the
-**ISO 8601 calendar date format**.
+The value MUST be represented as a date in the ``YYYY-MM-DD`` format,
+which conforms to the ISO 8601 calendar date format.
 
 Where:
 
@@ -267,7 +272,8 @@ Kingdom.
 Contents
 ------------
 
-The `contents.burrito` object MUST be included and contains an array.
+The ``contents`` object MUST be included and MUST contain a
+``burritos`` array.
 
 Each entry identifies one Scripture Burrito contained within the wrapper.
 
@@ -293,13 +299,14 @@ Each entry identifies one Scripture Burrito contained within the wrapper.
       }
 
 
-The `burritos` array MUST contain at least one entry with each entrying required to contain:
+The ``burritos`` array MUST contain at least one entry. Each entry MUST
+contain:
 
-* `id`
-* `path`
-* `role`
+* ``id``
+* ``path``
+* ``role``
 
-The `path` is relative to the directory containing `wrapper.json`.
+The ``path`` is relative to the directory containing ``wrapper.json``.
 
 Contained Burritos
 -----------------------
@@ -336,8 +343,9 @@ The standard roles are:
 |                   | Scripture deliverable.                                    |
 +-------------------+-----------------------------------------------------------+
 
-There can be only ONE burrito with the role `source`. There can be
-multiple burritos with the roles `derived` or `supplemental`.
+A wrapper MUST contain exactly one burrito with the role ``source``.
+There can be multiple burritos with the roles ``derived`` or
+``supplemental``.
 
 Custom roles MAY be used where supported by the Scripture Burrito
 specification. Custom roles SHOULD begin with ``x-``.
@@ -354,21 +362,21 @@ flavors.
 
 For example, an audio Scripture project could contain:
 
-* `audioTranslation`
-* `textTranslation`
-* `intellectualProperty`
-* `apmData`
+* ``audioTranslation``
+* ``textTranslation``
+* ``intellectualProperty``
+* ``apmData``
 
 The wrapper therefore provides a mechanism for grouping related
 Scripture Burritos without requiring the individual flavors to be
 merged into a single burrito.
 
 The flavor of each contained burrito is determined by its own
-metadata.json. The example in the :ref:Contents <contents> section
+``metadata.json``. The example in the :ref:`Contents <contents>` section
 contains multiple flavor burritos.
 
 The first burrito in the ``contents.burritos`` array describes an audio
-flavor burrito with the role `source`. It is stored in the
+flavor burrito with the role ``source``. It is stored in the
 audio/ directory, with its metadata in audio/metadata.json:
 
 .. admonition:: Primary Burrito Example
@@ -383,8 +391,10 @@ audio/ directory, with its metadata in audio/metadata.json:
       }
 
 
-The following text burrito flavor example describes a `derived` burrito from related to the example given 
-above with `id=SEHSAM-audio`. Also the burrito for this text flavor is stored in the directory `text/metadata.json`:
+The following example describes a text flavor burrito with the
+``derived`` role. It is related to the audio burrito described above,
+with ``id`` set to ``SEHSAM-audio``. The text burrito is stored in the
+``text/`` directory, with its metadata in ``text/metadata.json``:
 
 .. admonition:: Derived Burrito Example
    :class: example
@@ -421,22 +431,18 @@ collection as a whole or describes the relationship between the
 contained resources.
 
 
-Wrapper Flavor 
----------------------
+Wrapper Flavor
+--------------
 
-A wrapper MUST NOT make assumptions about the flavor of a contained
-burrito. The flavor MUST be determined from the metadata of the
-contained burrito.
+A wrapper MUST NOT define or override the flavor of a contained
+burrito. The flavor MUST be determined from the contained burrito's
+``metadata.json``.
 
 A wrapper MAY contain multiple burritos of the same flavor or burritos
 of different flavors.
 
 This allows the wrapper to group related resources while keeping each
-Scripture Burrito flavor independently defined and validated.
-
-A Scripture Burrito Wrapper **CANNOT** contain another Scripture Burrito Wrapper. Nested wrappers are not permitted. There can only be **ONE** ``wrapper.json`` at the top level.
-
-A wrapper **MUST NOT** directly or indirectly contain itself. Circular references between wrappers are not permitted.
+Scripture Burrito independently defined and validated.
 
 
 Validation
@@ -453,10 +459,7 @@ Validation of a wrapper MUST verify that:
 * The ``contents`` object contains a ``burritos`` array.
 * The ``burritos`` array contains at least one entry.
 * Each burrito entry contains ``id``, ``path``, and ``role``.
-* Each ``path`` identifies a valid Scripture Burrito within the wrapper package.
 * A contained Scripture Burrito contains its required ``metadata.json``.
-* A contained Scripture Burrito Wrapper contains its required
-  ``wrapper.json``.
 
 Validation of each contained Scripture Burrito MUST be performed
 according to the specification for that burrito's flavor.

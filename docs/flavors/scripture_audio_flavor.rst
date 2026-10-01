@@ -4,7 +4,6 @@
 Scripture Audio Specification
 ################################
 
-[:ref:`Tutorial <tutorial-audioTranslation>`]
 [:ref:`Example <examples-audioTranslation>`]
 
 

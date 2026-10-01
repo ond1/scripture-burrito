@@ -50,7 +50,7 @@ Documentation
    :maxdepth: 1
 
    introduction/index
-   introduction/structure
+   Structure <introduction/structure>
    schema_docs/index
    flavors/index
    examples/index

@@ -190,7 +190,7 @@ For example::
       "version": "4.6.0.alpha.0"
     }
 
-The ``name`` property is specified by the creator. This property best describes the name of the software.
+The ``name`` property is specified by the author. This property best describes the name of the software.
 The ``version`` property specifies the version of the software used to create the wrapper and is presented as a string.
 
 Date Created
@@ -267,7 +267,7 @@ Kingdom.
 Contents
 ------------
 
-The `contents` object MUST contain a `burritos` array.
+The `contents` object MUST be included and contains an array.
 
 Each entry identifies one Scripture Burrito contained within the wrapper.
 
@@ -293,8 +293,7 @@ Each entry identifies one Scripture Burrito contained within the wrapper.
       }
 
 
-The `burritos` array MUST contain at least one entry. Each entry MUST
-contain:
+The `burritos` array MUST contain at least one entry with each entrying required to contain:
 
 * `id`
 * `path`
@@ -345,7 +344,7 @@ The role is a property of the relationship within the wrapper and does
 not determine the flavor of the contained burrito.
 
 
-Supporting Multiple flavors
+Supporting Multiple Flavors
 ---------------------------------
 
 A wrapper MAY contain any combination of supported Scripture Burrito
@@ -363,12 +362,14 @@ Scripture Burritos without requiring the individual flavors to be
 merged into a single burrito.
 
 The flavor of each contained burrito is determined by its own
-`metadata.json`.
+`metadata.json`. The following example illustrates an audio flavor burrito 
+with the role given as `source` and is stored in the directory `audio/metadata.json`:
 
 .. admonition:: Multiple Flavors
    :class: example
 
    .. code-block:: json
+
       {
         "id": "SEHSAM-audio",
         "path": "audio",
@@ -376,11 +377,8 @@ The flavor of each contained burrito is determined by its own
       }
 
 
-The flavor of this burrito is determined by:
-
-audio/metadata.json
-
-
+The following text burrito flavor example is a `derived` burrito from the burrito given 
+above with `id=SEHSAM-audio` and is stored `text/metadata.json`:
 
 .. admonition:: Contained Burrito Example
    :class: example
@@ -392,11 +390,6 @@ audio/metadata.json
         "path": "text",
         "role": "derived"
       }
-
-gets its flavor from:
-
-text/metadata.json
-
 
 This separation allows each flavor to evolve independently while still
 allowing related resources to be distributed together.
@@ -435,31 +428,15 @@ of different flavors.
 This allows the wrapper to group related resources while keeping each
 Scripture Burrito flavor independently defined and validated.
 
-
 Nested Wrappers
----------------------
 
-A Scripture Burrito Wrapper MAY contain another Scripture Burrito
-Wrapper.
+```
 
-A nested wrapper MUST itself be a valid Scripture Burrito Wrapper and
-MUST contain its own ``wrapper.json``.
+A Scripture Burrito Wrapper **CANNOT** contain another Scripture Burrito Wrapper. Nested wrappers are not permitted. There can only be **ONE** ``wrapper.json`` at the top level.
 
-For example::
+A wrapper **MUST NOT** directly or indirectly contain itself. Circular references between wrappers are not permitted.
+```
 
-    project/
-    ├── wrapper.json
-    ├── translations/
-    │   ├── audio/
-    │   │   └── metadata.json
-    │   └── text/
-    │       └── metadata.json
-
-The ``path`` of a nested wrapper MUST identify the directory containing
-the nested ``wrapper.json``.
-
-A wrapper MUST NOT directly or indirectly contain itself. Circular
-references between wrappers are not permitted.
 
 
 Validation
